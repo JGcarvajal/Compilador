@@ -18,6 +18,7 @@ class AnalizadorLexico (var codigoFuente:String) {
             }
             if (esDecimal()) continue
             if (esEntero()) continue
+            if (esComentarioBloque()) continue
 
             almacenarToken(""+caracterActual,Categoria.DESCONOCIDO,filaActual,columnaActual)
             obtenerSiguienteCaracter()
@@ -48,6 +49,58 @@ class AnalizadorLexico (var codigoFuente:String) {
             }
             almacenarToken(lexema,Categoria.ENTREO,filaInicial,columnaInicial);
             return true
+        }
+        return false
+    }
+
+    fun esIdentificador():Boolean {
+        if (caracterActual.isDigit()){
+            var lexema =""
+            var filaInicial=filaActual
+            var columnaInicial=columnaActual
+            var posicionInicial=posicionActual
+
+            lexema+=caracterActual
+            obtenerSiguienteCaracter()
+
+            while(caracterActual.isDigit()){
+                lexema+=caracterActual
+                obtenerSiguienteCaracter()
+            }
+
+            if (caracterActual=='.'){
+                hacerBT(posicionInicial,filaInicial,columnaInicial)
+                return false
+            }
+            almacenarToken(lexema,Categoria.ENTREO,filaInicial,columnaInicial);
+            return true
+        }
+        return false
+    }
+
+    /**
+     * Ente metodo permite determinar si un token es comentario de bloque
+     */
+    fun esComentarioBloque():Boolean{
+        if(caracterActual=='#'){
+            var lexema =""
+            var filaInicial=filaActual
+            var columnaInicial=columnaActual
+            var posicionInicial=posicionActual
+            lexema+=caracterActual
+            obtenerSiguienteCaracter()
+
+            while (caracterActual!='#'){
+                lexema+=caracterActual
+                obtenerSiguienteCaracter()
+            }
+            if (caracterActual=='#') {
+                lexema+=caracterActual
+                obtenerSiguienteCaracter()
+                almacenarToken(lexema, Categoria.COMENTARIO_BLOQUE, filaInicial, columnaInicial);
+                return true
+            }
+
         }
         return false
     }
