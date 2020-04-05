@@ -33,12 +33,229 @@ class AnalizadorLexico (var codigoFuente:String) {
             if (esOperadorLogico()) continue
             if (esOperadorRelacional()) continue
             if (esOperadorAsignacion()) continue
+            if (esCadena()) continue
+            if (esSeparador()) continue
+            if (esPalabraReservada()) continue
+            if (esAgrupador()) continue
+            if (esOperadorIncremento()) continue
+            if (esCaracter()) continue
 
             almacenarToken(""+caracterActual,Categoria.DESCONOCIDO,filaActual,columnaActual)
             obtenerSiguienteCaracter()
         }
     }
 
+    fun esCaracter():Boolean{
+        if(caracterActual+""=="'"){
+            var lexema =""
+            var filaInicial=filaActual
+            var columnaInicial=columnaActual
+            var posicionInicial=posicionActual
+
+            lexema+=caracterActual
+            obtenerSiguienteCaracter()
+
+            if(caracterActual+""=="'"){
+                lexema+=caracterActual
+                obtenerSiguienteCaracter()
+
+                if(caracterActual+""=="'") {
+                    hacerBT(posicionInicial,filaInicial,columnaInicial)
+                    return false
+                }
+
+                lexema+=caracterActual
+                obtenerSiguienteCaracter()
+
+                if(caracterActual+""=="'") {
+                    lexema += caracterActual
+                    obtenerSiguienteCaracter()
+
+                    if(caracterActual+""=="'") {
+                        lexema += caracterActual
+                        almacenarToken(lexema, Categoria.CARACTER, filaInicial, columnaInicial);
+                        obtenerSiguienteCaracter()
+                        return true
+                    }else{
+                    hacerBT(posicionInicial,filaInicial,columnaInicial)
+                    return false
+                }
+                }else{
+                    hacerBT(posicionInicial,filaInicial,columnaInicial)
+                    return false
+                }
+            }else {
+                hacerBT(posicionInicial,filaInicial,columnaInicial)
+                return false
+            }
+        }
+        return false
+    }
+    fun esOperadorIncremento():Boolean{
+        var lexema =""
+        var filaInicial=filaActual
+        var columnaInicial=columnaActual
+        var posicionInicial=posicionActual
+
+        if (caracterActual=='+' || caracterActual=='-'){
+            lexema+=caracterActual
+            obtenerSiguienteCaracter()
+
+            if(caracterActual=='+'&& lexema=="+"){
+                lexema+=caracterActual
+                almacenarToken(lexema, Categoria.OPERADOR_INCREMENTO, filaInicial, columnaInicial);
+                obtenerSiguienteCaracter()
+                return true
+            } else if(caracterActual=='-'&& lexema=="-"){
+                lexema+=caracterActual
+                almacenarToken(lexema, Categoria.OPERADOR_DECREMENTO, filaInicial, columnaInicial);
+                obtenerSiguienteCaracter()
+                return true
+            }else{
+                hacerBT(posicionInicial,filaInicial,columnaInicial)
+                return false
+            }
+
+        }
+        return false
+    }
+    fun esAgrupador():Boolean{
+        var lexema =""
+        var filaInicial=filaActual
+        var columnaInicial=columnaActual
+        var posicionInicial=posicionActual
+        if (caracterActual=='{'){
+            lexema+=caracterActual
+            almacenarToken(lexema, Categoria.LLAVE_IZQUIERDA, filaInicial, columnaInicial);
+            obtenerSiguienteCaracter()
+            return true
+        }
+        if (caracterActual=='}'){
+            lexema+=caracterActual
+            almacenarToken(lexema, Categoria.LLAVE_DERECHA, filaInicial, columnaInicial);
+            obtenerSiguienteCaracter()
+            return true
+        }
+        if (caracterActual=='('){
+            lexema+=caracterActual
+            almacenarToken(lexema, Categoria.PARENTESIS_IZQUIERDO, filaInicial, columnaInicial);
+            obtenerSiguienteCaracter()
+            return true
+        }
+        if (caracterActual==')'){
+            lexema+=caracterActual
+            almacenarToken(lexema, Categoria.PARENTESIS_DERECHO, filaInicial, columnaInicial);
+            obtenerSiguienteCaracter()
+            return true
+        }
+        if (caracterActual=='['){
+            lexema+=caracterActual
+            almacenarToken(lexema, Categoria.CORCHETE_IZQUIERDO, filaInicial, columnaInicial);
+            obtenerSiguienteCaracter()
+            return true
+        }
+        if (caracterActual==']'){
+            lexema+=caracterActual
+            almacenarToken(lexema, Categoria.CORCHETE_DERECHO, filaInicial, columnaInicial);
+            obtenerSiguienteCaracter()
+            return true
+        }
+        return false
+    }
+
+    fun esPalabraReservada():Boolean{
+        var palabrasRes=ArrayList<String>()
+        palabrasRes.add("where")
+        palabrasRes.add("is")
+        palabrasRes.add("equalString")
+        palabrasRes.add("select")
+        palabrasRes.add("group")
+        palabrasRes.add("by")
+        palabrasRes.add("his")
+        palabrasRes.add("and")
+        palabrasRes.add("not")
+        palabrasRes.add("enter")
+        palabrasRes.add("delete")
+        palabrasRes.add("all")
+        palabrasRes.add("data")
+        palabrasRes.add("update")
+        palabrasRes.add("in")
+        palabrasRes.add("ad")
+        palabrasRes.add("subtract")
+        palabrasRes.add("falling")
+        palabrasRes.add("upward")
+        palabrasRes.add("mthod")
+        palabrasRes.add("class")
+        palabrasRes.add("list")
+        palabrasRes.add("string")
+        palabrasRes.add("integer")
+        palabrasRes.add("decimal")
+        palabrasRes.add("float")
+
+
+        if(caracterActual.isLetter()){
+            var lexema =""
+            var filaInicial=filaActual
+            var columnaInicial=columnaActual
+            var posicionInicial=posicionActual
+
+            lexema+=caracterActual
+            obtenerSiguienteCaracter()
+
+            while (caracterActual.isLetter()){
+                lexema+=caracterActual
+                obtenerSiguienteCaracter()
+
+                if(palabrasRes.contains(lexema) ){
+                    almacenarToken(lexema, Categoria.PALABRA_RESERVADA, filaInicial, columnaInicial);
+                    return true
+                }
+            }
+
+            hacerBT(posicionInicial,filaInicial,columnaInicial)
+            return false
+
+        }
+        return false
+    }
+    fun esSeparador():Boolean{
+
+        if(caracterActual==','){
+            var lexema =""
+            var filaInicial=filaActual
+            var columnaInicial=columnaActual
+            lexema+=caracterActual
+            obtenerSiguienteCaracter()
+            almacenarToken(lexema, Categoria.SEPARADOR, filaInicial, columnaInicial);
+            return true
+        }
+
+        return false
+    }
+    fun esCadena():Boolean{
+        if(caracterActual=='"'){
+            var lexema =""
+            var filaInicial=filaActual
+            var columnaInicial=columnaActual
+            var posicionInicial=posicionActual
+            lexema+=caracterActual
+            obtenerSiguienteCaracter()
+
+            while (caracterActual!='"'){
+                lexema+=caracterActual
+                obtenerSiguienteCaracter()
+            }
+            if (caracterActual=='"') {
+                lexema+=caracterActual
+                obtenerSiguienteCaracter()
+                almacenarToken(lexema, Categoria.CADENA, filaInicial, columnaInicial);
+                return true
+
+            }
+
+        }
+        return false
+    }
     fun esOperadorMatematico():Boolean{
 
         var lexema =""
@@ -52,10 +269,8 @@ class AnalizadorLexico (var codigoFuente:String) {
 
             if (operadoresArit.contains(caracterActual)){
 
-                lexema+=caracterActual
-                almacenarToken(lexema, Categoria.DESCONOCIDO, filaActual, columnaActual)
-                obtenerSiguienteCaracter()
-                return true
+                hacerBT(posicionInicial,filaInicial,columnaInicial)
+                return false
 
             }
             almacenarToken(lexema, Categoria.OPERADOR_MATEMATICO, filaActual, columnaActual)
@@ -233,17 +448,19 @@ class AnalizadorLexico (var codigoFuente:String) {
 
             lexema+=caracterActual
             obtenerSiguienteCaracter()
+            if (caracterActual.isLetter()) {
+                do {
+                    lexema += caracterActual
+                    obtenerSiguienteCaracter()
+                } while (caracterActual != '_')
 
-            do{
+            }else{
                 lexema+=caracterActual
                 obtenerSiguienteCaracter()
-            }while(caracterActual!='_')
-
-            if (caracterActual=='.'){
-                hacerBT(posicionInicial,filaInicial,columnaInicial)
-                return false
+                almacenarToken(lexema,Categoria.DESCONOCIDO,filaInicial,columnaInicial);
+                return true
             }
-
+            var cadena:String="jlsdjkl5646*/*+++.}{+{+:][]*¡?=?=))()(&%#!|"
             lexema+=caracterActual
             obtenerSiguienteCaracter()
             almacenarToken(lexema,Categoria.IDENTIFICADOR,filaInicial,columnaInicial);

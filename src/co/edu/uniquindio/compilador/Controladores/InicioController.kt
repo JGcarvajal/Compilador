@@ -10,6 +10,8 @@ import javafx.scene.control.*
 import javafx.scene.control.cell.PropertyValueFactory
 import java.net.URL
 import java.util.*
+import kotlin.collections.ArrayList
+import kotlin.reflect.jvm.internal.impl.types.checker.NewCapturedType
 
 class InicioController : Initializable{
     @FXML lateinit var taCodigoFuente :TextArea
@@ -26,6 +28,11 @@ class InicioController : Initializable{
         clmColumna.cellValueFactory=PropertyValueFactory("columna")
     }
 
+    @FXML
+    fun Limpiar(){
+        taCodigoFuente.text=""
+        tblTokens.items=FXCollections.observableArrayList(ArrayList<Token>())
+    }
     @FXML
     fun AnalizarCodigo(e:ActionEvent){
         var codFuente=taCodigoFuente.text
