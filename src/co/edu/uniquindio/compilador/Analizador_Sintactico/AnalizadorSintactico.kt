@@ -19,6 +19,7 @@ class AnalizadorSintactico(var listaTokens:ArrayList<Token>) {
     }
 
     /**
+     * BNF para reresentar la unidad de compilacion
      * <UnidadCompilacion> ::= <ModificadorAcceso>”Class”<Identificador>  “{”<ListaFunciones> “}”
      */
     fun esUnidadCompilacion (): UnidadCompilacion?{
@@ -60,6 +61,7 @@ class AnalizadorSintactico(var listaTokens:ArrayList<Token>) {
     }
 
     /**
+     * * BNF para reresentar una lista funciones
      * <ListaFunciones> ::= <Funcion> [<ListaFunciones>]
       */
     fun esListaFunciones():ArrayList<Funcion>{
@@ -74,6 +76,7 @@ class AnalizadorSintactico(var listaTokens:ArrayList<Token>) {
     }
 
     /**
+     * BNF para reresentar una funcion
      * <Funcion> ::= <modificadorAcceso> “function”  <Return> <Identificador> “(” ”)” “{“<ListaSentencias> “}”
      */
     fun esFuncion():Funcion? {
@@ -133,6 +136,7 @@ class AnalizadorSintactico(var listaTokens:ArrayList<Token>) {
     }
 
     /**
+     * * BNF para reresentar una sentencia
      * <ListaSentencias>::=  <Sentecia> [<ListaSentencias> ]
      */
     fun esListaSentencias(): ArrayList<Sentencia>{
@@ -141,6 +145,7 @@ class AnalizadorSintactico(var listaTokens:ArrayList<Token>) {
     }
 
     /**
+     ** BNF para reresentar una lista de parametros
      * <ListaParametros> ::= <Parametro> ["," <ListaParametros>]
      */
     fun esListaParametros():ArrayList<Parametro>{
@@ -163,6 +168,7 @@ class AnalizadorSintactico(var listaTokens:ArrayList<Token>) {
     }
 
     /**
+     ** BNF para reresentar un parametro
      * <Parametro> ::=<TipoDato> <Identificador>
      */
     fun esParametro():Parametro?{
@@ -185,6 +191,7 @@ class AnalizadorSintactico(var listaTokens:ArrayList<Token>) {
     }
 
     /**
+     ** BNF para reresentar un modificador de acceso
      * <ModificadorAcceso> ::= “private” | “public” | “protected”
      */
     fun esModificadorAcceso ():Token?{
@@ -198,6 +205,7 @@ class AnalizadorSintactico(var listaTokens:ArrayList<Token>) {
     }
 
     /**
+     * BNF para reresentar un tio de retorno
      * <TipoRetorno> ::= “String” | “Integer” | “Decimal” | “Float” | “List” | Identificador | “notReturn”
      */
     fun esTipoRetorno(): Token?{
@@ -216,6 +224,7 @@ class AnalizadorSintactico(var listaTokens:ArrayList<Token>) {
     }
 
     /**
+     ** BNF para reresentar un tipo de parametro
      * <TipoRetorno> ::= “String” | “Integer” | “Decimal” | “Float” | “List” | Identificador | “notReturn”
      */
     fun esTipoParametro(): Token?{
@@ -233,6 +242,9 @@ class AnalizadorSintactico(var listaTokens:ArrayList<Token>) {
         return null
     }
 
+    /**
+     * Este metodo permite agregar un error a la lista de errores
+     */
     fun reportarError( mensaje:String){
        listaErrores.add( Error(mensaje,tokenActual.fila,tokenActual.columna))
     }

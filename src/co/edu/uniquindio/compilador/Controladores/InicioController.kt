@@ -34,11 +34,18 @@ class InicioController : Initializable{
         leerDatos();
     }
 
+    /**
+     * Este metodo permite limpiar los campos y la tabla de la lista de tokens
+     */
     @FXML
     fun Limpiar(){
         taCodigoFuente.text=""
         tblTokens.items=FXCollections.observableArrayList(ArrayList<Token>())
     }
+
+    /**
+     * En este metodo se eenvia el codigo ingresado a analizar
+     */
     @FXML
     fun AnalizarCodigo(e:ActionEvent){
         var codFuente=taCodigoFuente.text
@@ -51,6 +58,9 @@ class InicioController : Initializable{
         escribirDatos(codFuente)
     }
 
+    /**
+     * Este metodo nos permite cargar datos que se hayan almacenado anteriormente
+     */
     fun leerDatos(){
         try {
 
@@ -75,6 +85,9 @@ class InicioController : Initializable{
         }
     }
 
+    /**
+     * Este metodo permite almacenar lo que se ha ingresado en la entrada de codigo
+     */
     fun escribirDatos(datos:String){
         var fichero:FileWriter?=null;
         try{

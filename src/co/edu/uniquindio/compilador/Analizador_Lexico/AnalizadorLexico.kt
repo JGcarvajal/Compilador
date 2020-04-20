@@ -45,6 +45,9 @@ class AnalizadorLexico (var codigoFuente:String) {
         }
     }
 
+    /**
+     * Este metodo permite construir el token de caracter
+     */
     fun esCaracter():Boolean{
         if(caracterActual+""=="'"){
             var lexema =""
@@ -91,6 +94,10 @@ class AnalizadorLexico (var codigoFuente:String) {
         }
         return false
     }
+
+    /**
+     * * Este metodo permite construir el token de Operaor de Incremento
+     */
     fun esOperadorIncremento():Boolean{
         var lexema =""
         var filaInicial=filaActual
@@ -119,6 +126,10 @@ class AnalizadorLexico (var codigoFuente:String) {
         }
         return false
     }
+
+    /**
+     ** Este metodo permite construir el token de agropador
+     */
     fun esAgrupador():Boolean{
         var lexema =""
         var filaInicial=filaActual
@@ -163,6 +174,9 @@ class AnalizadorLexico (var codigoFuente:String) {
         return false
     }
 
+    /**
+     * Este metodo permite construir el token de palabra reservada
+     */
     fun esPalabraReservada():Boolean{
         var palabrasRes=ArrayList<String>()
         palabrasRes.add("where")
@@ -223,6 +237,10 @@ class AnalizadorLexico (var codigoFuente:String) {
         }
         return false
     }
+
+    /**
+     * Este metodo permite construir el token del separador
+     */
     fun esSeparador():Boolean{
 
         if(caracterActual==','){
@@ -237,6 +255,10 @@ class AnalizadorLexico (var codigoFuente:String) {
 
         return false
     }
+
+    /**
+     * Este metodo permite construir el token de cadena
+     */
     fun esCadena():Boolean{
         if(caracterActual=='"'){
             var lexema =""
@@ -261,6 +283,10 @@ class AnalizadorLexico (var codigoFuente:String) {
         }
         return false
     }
+
+    /**
+     * Este metodo permite construir el token de operador matematico
+     */
     fun esOperadorMatematico():Boolean{
 
         var lexema =""
@@ -286,6 +312,9 @@ class AnalizadorLexico (var codigoFuente:String) {
         return false
     }
 
+    /**
+     * Este metodo permite construir el token de operador de asignacion
+     */
     fun esOperadorAsignacion():Boolean{
         var lexema =""
         var filaInicial=filaActual
@@ -317,6 +346,9 @@ class AnalizadorLexico (var codigoFuente:String) {
         return false
     }
 
+    /**
+     * Este metodo permite construir el token de operador logico
+     */
     fun esOperadorLogico():Boolean{
         val operadoresLog = ArrayList<Char>()
         operadoresLog.add('&')
@@ -346,6 +378,9 @@ class AnalizadorLexico (var codigoFuente:String) {
         return false
     }
 
+    /**
+     * Este metodo permite construir el token de operador relacional
+     */
     fun esOperadorRelacional():Boolean{
         val operadoresRelac = ArrayList<Char>()
         operadoresRelac.add('<')
@@ -383,6 +418,10 @@ class AnalizadorLexico (var codigoFuente:String) {
 
         return false
     }
+
+    /**
+     * Este metodo permite construir el token de fin de linea
+     */
     fun finLinea():Boolean{
         if(caracterActual=='\n'){
             almacenarToken(""+caracterActual,Categoria.TERMINAL_LINEA,filaActual,columnaActual)
@@ -391,6 +430,10 @@ class AnalizadorLexico (var codigoFuente:String) {
         }
         return false
     }
+
+    /**
+     * Este metodo permite construir el token de comentario de linea
+     */
     fun esComentarioLinea():Boolean{
         if (caracterActual=='%'){
             var lexema =""
@@ -416,6 +459,7 @@ class AnalizadorLexico (var codigoFuente:String) {
         }
         return false
     }
+
     /**
      * Este metodo nos permite determinar si un token es un entero
      */
@@ -444,6 +488,9 @@ class AnalizadorLexico (var codigoFuente:String) {
         return false
     }
 
+    /**
+     * Este metodo permite construir el token de Identificador
+     */
     fun esIdentificador():Boolean {
         if (caracterActual=='_'){
             var lexema =""
@@ -582,7 +629,5 @@ class AnalizadorLexico (var codigoFuente:String) {
         }
     }
 
-    fun error(){
 
-    }
 }
