@@ -8,6 +8,11 @@ import javafx.fxml.FXML
 import javafx.fxml.Initializable
 import javafx.scene.control.*
 import javafx.scene.control.cell.PropertyValueFactory
+import java.io.BufferedWriter
+import java.io.File
+import java.io.FileWriter
+import java.io.PrintWriter
+import java.lang.Exception
 import java.net.URL
 import java.util.*
 import kotlin.collections.ArrayList
@@ -26,6 +31,7 @@ class InicioController : Initializable{
         clmCategoria.cellValueFactory=PropertyValueFactory("categoria")
         clmFila.cellValueFactory=PropertyValueFactory("fila")
         clmColumna.cellValueFactory=PropertyValueFactory("columna")
+        leerDatos();
     }
 
     @FXML
@@ -42,7 +48,55 @@ class InicioController : Initializable{
 
             tblTokens.items=FXCollections.observableArrayList(lexico.listaTokens)
         }
+        escribirDatos(codFuente)
     }
 
+    fun leerDatos(){
+        try {
 
+
+            var path:String=System.getProperty("java.io.tmpdir")+File.separator+"codFuente.txt"
+            var archivo: File = File(path);
+
+            if (archivo.exists()) {
+
+            var scanner: Scanner = Scanner(archivo);
+            var linea: String = "";
+            while (scanner.hasNextLine()) {
+                linea += scanner.nextLine();
+
+            }
+            taCodigoFuente.text = linea
+                scanner.close()
+            }
+        }
+        catch (e:Exception){
+            taCodigoFuente.text="";
+        }
+    }
+
+    fun escribirDatos(datos:String){
+        var fichero:FileWriter?=null;
+        try{
+           // var ruta = "E:/archivo.txt";
+            var path:String=System.getProperty("java.io.tmpdir")+File.separator+"codFuente.txt"
+            var archivo: File = File(path);
+             fichero= FileWriter(path);
+
+            if (!archivo.exists()) {
+                archivo.createNewFile();
+            }
+            var pw:PrintWriter= PrintWriter(fichero)
+            pw.println(datos)
+
+
+    }catch (e:Exception){
+            print("No se ha podido almacenar los datos")
+     }finally {
+
+            if (fichero != null){
+                fichero.close()
+            }
+     }
+    }
 }

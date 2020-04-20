@@ -173,6 +173,7 @@ class AnalizadorLexico (var codigoFuente:String) {
         palabrasRes.add("by")
         palabrasRes.add("his")
         palabrasRes.add("and")
+        palabrasRes.add("notReturn")
         palabrasRes.add("not")
         palabrasRes.add("enter")
         palabrasRes.add("delete")
@@ -191,6 +192,10 @@ class AnalizadorLexico (var codigoFuente:String) {
         palabrasRes.add("integer")
         palabrasRes.add("decimal")
         palabrasRes.add("float")
+        palabrasRes.add("function")
+        palabrasRes.add("public")
+        palabrasRes.add("private")
+        palabrasRes.add("protected")
 
 
         if(caracterActual.isLetter()){
@@ -206,7 +211,7 @@ class AnalizadorLexico (var codigoFuente:String) {
                 lexema+=caracterActual
                 obtenerSiguienteCaracter()
 
-                if(palabrasRes.contains(lexema) ){
+                if(palabrasRes.contains(lexema.toLowerCase()) ){
                     almacenarToken(lexema, Categoria.PALABRA_RESERVADA, filaInicial, columnaInicial);
                     return true
                 }
@@ -226,7 +231,7 @@ class AnalizadorLexico (var codigoFuente:String) {
             var columnaInicial=columnaActual
             lexema+=caracterActual
             obtenerSiguienteCaracter()
-            almacenarToken(lexema, Categoria.SEPARADOR, filaInicial, columnaInicial);
+            almacenarToken(lexema, Categoria.SEPARADOR_COMA, filaInicial, columnaInicial);
             return true
         }
 
