@@ -8,6 +8,7 @@ class AnalizadorLexico (var codigoFuente:String) {
     var filaActual=0
     var columnaActual=0
     val operadoresArit = ArrayList<Char>()
+    var listaErrores =ArrayList<String>()
     /**
      * Este metodo nos permite analizar el texto que se ha ingresado
      */
@@ -181,7 +182,7 @@ class AnalizadorLexico (var codigoFuente:String) {
         var palabrasRes=ArrayList<String>()
         palabrasRes.add("where")
         palabrasRes.add("is")
-        palabrasRes.add("equalString")
+        palabrasRes.add("equalstring")
         palabrasRes.add("select")
         palabrasRes.add("group")
         palabrasRes.add("by")
@@ -199,7 +200,7 @@ class AnalizadorLexico (var codigoFuente:String) {
         palabrasRes.add("subtract")
         palabrasRes.add("falling")
         palabrasRes.add("upward")
-        palabrasRes.add("mthod")
+        palabrasRes.add("method")
         palabrasRes.add("class")
         palabrasRes.add("list")
         palabrasRes.add("string")
@@ -210,6 +211,8 @@ class AnalizadorLexico (var codigoFuente:String) {
         palabrasRes.add("public")
         palabrasRes.add("private")
         palabrasRes.add("protected")
+        palabrasRes.add("foreach")
+        palabrasRes.add("as")
 
 
         if(caracterActual.isLetter()){
@@ -424,7 +427,7 @@ class AnalizadorLexico (var codigoFuente:String) {
      */
     fun finLinea():Boolean{
         if(caracterActual=='\n'){
-            almacenarToken(""+caracterActual,Categoria.TERMINAL_LINEA,filaActual,columnaActual)
+            almacenarToken(""+caracterActual,Categoria.FIN_SENTENCIA,filaActual,columnaActual)
             obtenerSiguienteCaracter()
             return true
         }

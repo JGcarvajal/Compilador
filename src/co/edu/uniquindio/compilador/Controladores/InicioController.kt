@@ -2,6 +2,7 @@ package co.edu.uniquindio.compilador.Controladores
 
 import co.edu.uniquindio.compilador.Analizador_Lexico.AnalizadorLexico
 import co.edu.uniquindio.compilador.Analizador_Lexico.Token
+import co.edu.uniquindio.compilador.Analizador_Sintactico.AnalizadorSintactico
 import javafx.collections.FXCollections
 import javafx.event.ActionEvent
 import javafx.fxml.FXML
@@ -25,6 +26,8 @@ class InicioController : Initializable{
     @FXML lateinit var clmCategoria:TableColumn<Token,String>
     @FXML lateinit var clmFila:TableColumn<Token,Int>
     @FXML lateinit var clmColumna:TableColumn<Token,Int>
+
+    @FXML lateinit var tvArbol:TreeView<String>
 
     override fun initialize(p0: URL?, p1: ResourceBundle?) {
         clmLexema.cellValueFactory=PropertyValueFactory("lexema")
@@ -54,6 +57,20 @@ class InicioController : Initializable{
             lexico.Analizar()
 
             tblTokens.items=FXCollections.observableArrayList(lexico.listaTokens)
+
+            if (lexico.listaErrores.isEmpty()) {
+                var sintaxis = AnalizadorSintactico(lexico.listaTokens)
+                var unidadCompilacion = sintaxis.esUnidadCompilacion()
+
+                if (unidadCompilacion != null) {
+                    tvArbol.root = unidadCompilacion.getArbolVisual()
+                }
+            }else{
+                var alerta=Alert(Alert.AlertType.WARNING)
+
+                alerta.headerText="Atención"
+                alerta.contentText = "Hay errores lexicos en el codigo fuente"
+            }
         }
         escribirDatos(codFuente)
     }
