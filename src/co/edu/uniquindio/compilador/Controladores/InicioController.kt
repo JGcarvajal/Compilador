@@ -3,6 +3,7 @@ package co.edu.uniquindio.compilador.Controladores
 import co.edu.uniquindio.compilador.Analizador_Lexico.AnalizadorLexico
 import co.edu.uniquindio.compilador.Analizador_Lexico.Token
 import co.edu.uniquindio.compilador.Analizador_Sintactico.AnalizadorSintactico
+import co.edu.uniquindio.compilador.Miscelaneos.Error
 import javafx.collections.FXCollections
 import javafx.event.ActionEvent
 import javafx.fxml.FXML
@@ -21,12 +22,22 @@ import kotlin.reflect.jvm.internal.impl.types.checker.NewCapturedType
 
 class InicioController : Initializable{
     @FXML lateinit var taCodigoFuente :TextArea
+
+    //Tbala tokens
     @FXML lateinit var tblTokens :TableView<Token>
     @FXML lateinit var clmLexema:TableColumn<Token,String>
     @FXML lateinit var clmCategoria:TableColumn<Token,String>
     @FXML lateinit var clmFila:TableColumn<Token,Int>
     @FXML lateinit var clmColumna:TableColumn<Token,Int>
 
+    //Tabla Errores Sintacticos
+    @FXML lateinit var tblErroresSintacticos :TableView<Error>
+    @FXML lateinit var clMensajeES:TableColumn<Error,String>
+    @FXML lateinit var clFilaES:TableColumn<Error,Int>
+    @FXML lateinit var clColumnaES:TableColumn<Error,Int>
+    @FXML lateinit var clCategoriaES:TableColumn<Error,String>
+
+    // Arbol Sintactico
     @FXML lateinit var tvArbol:TreeView<String>
 
     override fun initialize(p0: URL?, p1: ResourceBundle?) {
@@ -34,6 +45,13 @@ class InicioController : Initializable{
         clmCategoria.cellValueFactory=PropertyValueFactory("categoria")
         clmFila.cellValueFactory=PropertyValueFactory("fila")
         clmColumna.cellValueFactory=PropertyValueFactory("columna")
+
+        clMensajeES.cellValueFactory=PropertyValueFactory("error")
+        clFilaES.cellValueFactory=PropertyValueFactory("fila")
+        clColumnaES.cellValueFactory=PropertyValueFactory("columna")
+        clCategoriaES.cellValueFactory=PropertyValueFactory("categoria")
+
+
         leerDatos();
     }
 
@@ -61,6 +79,8 @@ class InicioController : Initializable{
             if (lexico.listaErrores.isEmpty()) {
                 var sintaxis = AnalizadorSintactico(lexico.listaTokens)
                 var unidadCompilacion = sintaxis.esUnidadCompilacion()
+
+                tblErroresSintacticos.items=FXCollections.observableArrayList(sintaxis.listaErrores)
 
                 if (unidadCompilacion != null) {
                     tvArbol.root = unidadCompilacion.getArbolVisual()

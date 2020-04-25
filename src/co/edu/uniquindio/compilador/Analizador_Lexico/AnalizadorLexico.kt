@@ -213,6 +213,9 @@ class AnalizadorLexico (var codigoFuente:String) {
         palabrasRes.add("protected")
         palabrasRes.add("foreach")
         palabrasRes.add("as")
+        palabrasRes.add("if")
+        palabrasRes.add("else")
+        palabrasRes.add("int")
 
 
         if(caracterActual.isLetter()){
@@ -227,13 +230,15 @@ class AnalizadorLexico (var codigoFuente:String) {
             while (caracterActual.isLetter()){
                 lexema+=caracterActual
                 obtenerSiguienteCaracter()
-
-                if(palabrasRes.contains(lexema.toLowerCase()) ){
-                    almacenarToken(lexema, Categoria.PALABRA_RESERVADA, filaInicial, columnaInicial);
-                    return true
                 }
-            }
 
+
+             if(palabrasRes.contains(lexema.toLowerCase()) ){
+
+            almacenarToken(lexema, Categoria.PALABRA_RESERVADA, filaInicial, columnaInicial);
+            return true
+
+             }
             hacerBT(posicionInicial,filaInicial,columnaInicial)
             return false
 

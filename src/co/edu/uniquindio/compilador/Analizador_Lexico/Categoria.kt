@@ -27,5 +27,6 @@ enum class Categoria {
     OPERADOR_INCREMENTO,
     OPERADOR_DECREMENTO,
     CARACTER,
-    FIN_SENTENCIA
+    FIN_SENTENCIA,
+    SIGNO
 }

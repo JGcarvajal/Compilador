@@ -25,9 +25,10 @@ class Funcion (var nombreFuncion:Token, var tipoRetorno: Token, var listaParamet
 
         var raizSentencias= TreeItem("Sentencias")
         for(s in listaSentencias){
-            raizParametros.children.add(s.getArbolVisual())
+            raizSentencias.children.add(s.getArbolVisual())
         }
         raiz.children.add(raizSentencias)
+
         return raiz
     }
 }
