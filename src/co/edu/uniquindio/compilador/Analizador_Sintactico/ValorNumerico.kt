@@ -1,9 +1,17 @@
 package co.edu.uniquindio.compilador.Analizador_Sintactico
 
 import co.edu.uniquindio.compilador.Analizador_Lexico.Token
+import javafx.scene.control.TreeItem
 
 class ValorNumerico(var signo:Token, var numero:Token){
     override fun toString(): String {
         return "ValorNumerico(signo=$signo, numero=$numero)"
+    }
+     fun getArbolVisual(): TreeItem<String> {
+        var raiz= TreeItem<String>("Valor Numerico")
+        raiz.children.add(TreeItem("Signo: ${signo.lexema}"))
+        raiz.children.add(TreeItem("Numero: ${numero.lexema}"))
+
+        return raiz
     }
 }

@@ -3,6 +3,7 @@ package co.edu.uniquindio.compilador.Analizador_Sintactico
 import co.edu.uniquindio.compilador.Analizador_Lexico.Categoria
 import co.edu.uniquindio.compilador.Analizador_Lexico.Token
 import co.edu.uniquindio.compilador.Miscelaneos.Error
+import javafx.css.Declaration
 import kotlin.math.exp
 
 class AnalizadorSintactico(var listaTokens:ArrayList<Token>) {
@@ -43,7 +44,7 @@ class AnalizadorSintactico(var listaTokens:ArrayList<Token>) {
                                 reportarError("Falta la lista de funciones","Unidad de Compilacion")
                             }
                         }else{
-                            reportarError("Falta la llave de cierre de la funcion","Unidad de Compilacion")
+                            reportarError("Falta la llave de cierre de la undad de compilacion","Unidad de Compilacion")
                         }
                     }else{
                         reportarError("Falta la llave de apertura de la funcion","Unidad de Compilacion")
@@ -78,7 +79,7 @@ class AnalizadorSintactico(var listaTokens:ArrayList<Token>) {
 
     /**
      * BNF para reresentar una funcion
-     * <Funcion> ::= <modificadorAcceso> “function”  <Return> <Identificador> “(” ”)” “{“<ListaSentencias> “}”
+     * <Funcion> ::= <modificadorAcceso> “function”  <Return> <Identificador> “(” ”)” “{“<ListaSentencias> [ “return” <Expresion>]  “}”
      */
     fun esFuncion():Funcion? {
         if (esModificadorAcceso()!= null) {
@@ -103,6 +104,23 @@ class AnalizadorSintactico(var listaTokens:ArrayList<Token>) {
                                     obtenerSiguienteToken()
 
                                     var listaSentencias= esListaSentencias()
+                                    //obtenerSiguienteToken()
+
+                                    if (tokenActual.categoria == Categoria.PALABRA_RESERVADA && tokenActual.lexema.toLowerCase() == "return" ){
+                                        obtenerSiguienteToken()
+                                        var expresion = esExpresion()
+
+                                        if (expresion == null){
+                                            reportarError("Falta la expresion de retorno de la funcion","Funciones")
+                                            return null
+                                        }
+                                        if (tokenActual.categoria != Categoria.FIN_SENTENCIA) {
+                                            reportarError("Falta el fin de linea de del retorno de la funcion","Funciones")
+                                            return null
+                                        }
+                                    }
+
+
                                     //obtenerSiguienteToken()
 
                                     if (tokenActual.categoria == Categoria.LLAVE_DERECHA) {
@@ -229,11 +247,11 @@ class AnalizadorSintactico(var listaTokens:ArrayList<Token>) {
             //obtenerSiguienteToken()
             if(tokenActual.lexema.toLowerCase() == "string" || tokenActual.lexema.toLowerCase() == "integer"
                 ||tokenActual.lexema.toLowerCase() == "decimal"||tokenActual.lexema.toLowerCase() == "float"
-                ||tokenActual.lexema.toLowerCase() == "list" ){
+                ||tokenActual.lexema.toLowerCase() == "list" ||tokenActual.lexema.toLowerCase() == "int" ){
                 return tokenActual
             }
         } else{
-            if(tokenActual.categoria==Categoria.IDENTIFICADOR){
+            if(tokenActual.categoria==Categoria.IDENTIFICADOR && listaTokens[posicionActual+1].categoria != Categoria.PARENTESIS_IZQUIERDO){
                 return tokenActual
             }
         }
@@ -244,13 +262,15 @@ class AnalizadorSintactico(var listaTokens:ArrayList<Token>) {
      * Este metodo permite agregar un error a la lista de errores
      */
     fun reportarError( mensaje:String, categoria:String){
-       listaErrores.add( Error(mensaje,tokenActual.fila,tokenActual.columna, categoria))
+        listaErrores.add( Error(mensaje,tokenActual.fila,tokenActual.columna, categoria))
     }
 
     /**
      * <InvocacionFuncion> ::= <Indentificador> “(“ [<ListaArgumentos>] “)”
      */
     fun esInvocacionFuncion(): Invocacion? {
+        while (tokenActual.categoria == Categoria.FIN_SENTENCIA) obtenerSiguienteToken()
+
         if (tokenActual.categoria == Categoria.IDENTIFICADOR) {
             val nombreFuncion = tokenActual
             obtenerSiguienteToken()
@@ -331,7 +351,28 @@ class AnalizadorSintactico(var listaTokens:ArrayList<Token>) {
         return null
     }
 
-    fun esExpresionRelacional():Expresion?{
+    /***
+     * <ExpresionRelacional>::= <ExpresionAritmetica> <OperadorRelacional> <ExpresionAritmetica>
+     */
+    fun esExpresionRelacional():ExpresionRelacional?{
+        var expresion1=esExpresionAritmetica()
+        if (expresion1 != null){
+            //obtenerSiguienteToken()
+
+            if (tokenActual.categoria == Categoria.OPERADOR_RELACIONAL){
+                var operadorRelacional=tokenActual
+                obtenerSiguienteToken()
+                var expresion2=esExpresionAritmetica()
+
+                if (expresion2 != null) {
+                    return ExpresionRelacional(expresion1,operadorRelacional,expresion2)
+                }else{
+                    reportarError("Falta la operacion 2 de la expresion relacional","Expresion Relacional")
+                }
+            }else{
+                reportarError("Falta el operador relacional","Expresion Relacional")
+            }
+        }
         return null
     }
     /**
@@ -356,15 +397,18 @@ class AnalizadorSintactico(var listaTokens:ArrayList<Token>) {
                         if (expAritmetica2 != null){
                             return ExpresionAritmetica(expAritmetica, operador,expAritmetica2)
                         }
+                    }else{
+                        return ExpresionAritmetica(expAritmetica)
                     }
                 }else{
-                    return ExpresionAritmetica(expAritmetica)
+                    reportarError("Falta el parentesis derecho de la expresion Aritmetica","Expresion Aritmetica")
                 }
             }
         }else{
             var numerico=esValorNumerico()
-            obtenerSiguienteToken()
+
             if (numerico != null) {
+                obtenerSiguienteToken()
                 if (tokenActual.categoria == Categoria.OPERADOR_MATEMATICO) {
                     var operador = tokenActual
                     obtenerSiguienteToken()
@@ -372,7 +416,10 @@ class AnalizadorSintactico(var listaTokens:ArrayList<Token>) {
                     val expAritmetica2: ExpresionAritmetica? = esExpresionAritmetica()
 
                     if (expAritmetica2 != null) {
+                        //obtenerSiguienteToken()
                         return ExpresionAritmetica(numerico, operador, expAritmetica2)
+                    }else{
+                        reportarError("Falta la expresion 2 de la Expresion Aritmetica","Expresion Aritmetica")
                     }
                 } else {
                     return ExpresionAritmetica(numerico)
@@ -426,26 +473,78 @@ class AnalizadorSintactico(var listaTokens:ArrayList<Token>) {
         var sentencia:Sentencia?=esCicloForEach()
         if (sentencia != null) return sentencia
 
+        sentencia=esCicloWhile()
+        if (sentencia != null) return sentencia
+
         sentencia=esAsignacion()
         if (sentencia != null) return sentencia
 
         sentencia=esDecicionSimple()
         if (sentencia != null) return sentencia
 
+        sentencia=esDeclaracion()
+        if (sentencia != null) return sentencia
+
+        sentencia=esInvocacionFuncion()
+        if (sentencia != null) return sentencia
+
         return null
     }
 
+    /***
+     *<Declaracion> ::= [<ModificadorAcceso>] <TipoDato> <Identificador> [<OperadorAsignacion> <TipoAsignacion>]
+     */
+    fun esDeclaracion():Declaracion?{
+        while (tokenActual.categoria == Categoria.FIN_SENTENCIA) obtenerSiguienteToken()
+
+        var modAcceso=esModificadorAcceso()
+        if (modAcceso != null) obtenerSiguienteToken()
+
+        var tipoDato=esTipoParametro()
+
+        if (tipoDato != null){
+            obtenerSiguienteToken()
+
+            if (tokenActual.categoria == Categoria.IDENTIFICADOR) {
+                var nombre = tokenActual
+                obtenerSiguienteToken()
+
+                if (tokenActual.categoria == Categoria.OPERADOR_ASIGNACION){
+                    var opAsignacion=tokenActual
+                    obtenerSiguienteToken()
+                    var expresion=esExpresion()
+
+                    if (expresion != null){
+                        var asignacion=Asignacion(nombre,opAsignacion,expresion)
+                        return Declaracion(modAcceso,tipoDato,nombre,asignacion)
+                    }else{
+                        reportarError("Falta la expresion de asignacion de la declaracion","Declaracion")
+                    }
+
+                }else{
+                    return Declaracion(modAcceso,tipoDato,nombre,null)
+                }
+
+            }else{
+                reportarError("Falta el identificador del la declaracion","Declaracion")
+            }
+
+        }
+
+        return null
+    }
     /**
      * <CicloForEach>::= “Foreach” “(“ <Identificador> “in” <Identificador> “as” <TipoDato> “)” “{”<ListaSentencias> “}”
      */
     fun esCicloForEach():CicloForeach?{
-        if (tokenActual.categoria == Categoria.FIN_SENTENCIA) obtenerSiguienteToken()
+        while (tokenActual.categoria == Categoria.FIN_SENTENCIA) obtenerSiguienteToken()
 
         if (tokenActual.categoria == Categoria.PALABRA_RESERVADA && tokenActual.lexema.toLowerCase() == "foreach" ){
             obtenerSiguienteToken()
             if(tokenActual.categoria == Categoria.PARENTESIS_IZQUIERDO) {
+                obtenerSiguienteToken()
                 if (tokenActual.categoria == Categoria.IDENTIFICADOR) {
-                    var lista = tokenActual.lexema
+                    var lista = tokenActual
                     obtenerSiguienteToken()
 
                     if (tokenActual.categoria == Categoria.PALABRA_RESERVADA && tokenActual.lexema.toLowerCase() == "in") {
@@ -454,37 +553,42 @@ class AnalizadorSintactico(var listaTokens:ArrayList<Token>) {
                         if (tokenActual.categoria == Categoria.IDENTIFICADOR) {
                             var item =tokenActual
                             obtenerSiguienteToken()
+                            if (tokenActual.categoria == Categoria.PALABRA_RESERVADA && tokenActual.lexema == "as") {
+                                obtenerSiguienteToken()
+                                var tipoDato = esTipoParametro()
 
-                            var tipoDato=esTipoParametro()
-
-                            if (tipoDato != null) {
-
-                                if (tokenActual.categoria == Categoria.PARENTESIS_DERECHO) {
+                                if (tipoDato != null) {
                                     obtenerSiguienteToken()
 
-                                    if (tokenActual.categoria == Categoria.LLAVE_IZQUIERDA) {
+                                    if (tokenActual.categoria == Categoria.PARENTESIS_DERECHO) {
                                         obtenerSiguienteToken()
-                                        var listaSentencias = esListaSentencias()
 
                                         if (tokenActual.categoria == Categoria.LLAVE_IZQUIERDA) {
-                                            return CicloForeach(listaSentencias, item, tipoDato)
+                                            obtenerSiguienteToken()
+                                            var listaSentencias = esListaSentencias()
+
+                                            if (tokenActual.categoria == Categoria.LLAVE_DERECHA) {
+                                                return CicloForeach(lista, item, tipoDato,listaSentencias)
+                                            } else {
+                                                reportarError("Falta llave derecha en el Foreach", "Ciclo Foreach")
+                                            }
                                         } else {
-                                            reportarError("Falta llave derecha en el Foreach","Ciclo Foreach")
+                                            reportarError("Falta llave izquierda en el Foreach", "Ciclo Foreach")
                                         }
                                     } else {
-                                        reportarError("Falta llave izquierda en el Foreach","Ciclo Foreach")
+                                        reportarError("Falta parentesis derecho en el Foreach", "Ciclo Foreach")
                                     }
                                 } else {
-                                    reportarError("Falta parentesis derecho en el Foreach","Ciclo Foreach")
+                                    reportarError("Tipo de dato invalido en el Foreach", "Ciclo Foreach")
                                 }
-                            }else{
-                                reportarError("Tipo de dato invalido en el Foreach","Ciclo Foreach")
+                            }else {
+                                reportarError("Falta la palabra reservada 'as' en el Foreach ","Ciclo Foreach")
                             }
                         } else {
                             reportarError("Identificador del item invalido en el Foreach","Ciclo Foreach")
                         }
                     } else {
-                        reportarError("Falta la palabra reservada 'As' en el Foreach","Ciclo Foreach")
+                        reportarError("Falta la palabra reservada 'in' en el Foreach","Ciclo Foreach")
                     }
                 } else {
                     reportarError("Lista no valida en el Foreach","Ciclo Foreach")
@@ -496,20 +600,63 @@ class AnalizadorSintactico(var listaTokens:ArrayList<Token>) {
         return null
     }
 
+    /***
+     * <CicloWhile> ::= “MeanTime” “(“ <ExpresionRelacional> “)” “{”<ListaSentencias> “}”
+     */
+    fun esCicloWhile():CicloWhile?{
+        while (tokenActual.categoria == Categoria.FIN_SENTENCIA) obtenerSiguienteToken()
+
+        if (tokenActual.categoria == Categoria.PALABRA_RESERVADA && tokenActual.lexema.toLowerCase() == "meantime"){
+                obtenerSiguienteToken()
+            if (tokenActual.categoria == Categoria.PARENTESIS_IZQUIERDO){
+                obtenerSiguienteToken()
+
+                var expRelacional=esExpresionRelacional()
+
+                if (expRelacional != null){
+                    if (tokenActual.categoria == Categoria.PARENTESIS_DERECHO){
+                        obtenerSiguienteToken()
+                        if (tokenActual.categoria == Categoria.LLAVE_IZQUIERDA){
+                            obtenerSiguienteToken()
+
+                            var sentencias=esListaSentencias()
+                            if (tokenActual.categoria == Categoria.LLAVE_DERECHA){
+                                obtenerSiguienteToken()
+                                return CicloWhile(expRelacional,sentencias)
+
+                            }else{
+                                reportarError("Falta la llave derecha del ciclo while","Ciclo While")
+                            }
+                        }else{
+                            reportarError("Falta la llave izquierda del ciclo while","Ciclo While")
+                        }
+                    }else{
+                        reportarError("Falta el parentesis derecho del ciclo while","Ciclo While")
+                    }
+                }else{
+                    reportarError("Falta la expresion relacional del ciclo while","Ciclo While")
+                }
+            }else{
+                reportarError("Falta el parentesis izquierdo del ciclo while","Ciclo While")
+            }
+        }
+        return null
+    }
+
     /**
      * <Asignacion> ::= <Identificador> <OperadorAsignacion> <Expreresion> “\n”
      */
     fun esAsignacion():Sentencia?{
-        if (tokenActual.categoria == Categoria.FIN_SENTENCIA) obtenerSiguienteToken()
+        while (tokenActual.categoria == Categoria.FIN_SENTENCIA) obtenerSiguienteToken()
 
-        if (tokenActual.categoria== Categoria.IDENTIFICADOR){
+        if (tokenActual.categoria== Categoria.IDENTIFICADOR && listaTokens[posicionActual+1].categoria != Categoria.PARENTESIS_IZQUIERDO ){
             var nombre=tokenActual
             obtenerSiguienteToken()
 
             if (tokenActual.categoria == Categoria.OPERADOR_ASIGNACION){
                 var opAsignacion= tokenActual
                 obtenerSiguienteToken()
-                var expresion:Expresion?=esExpresion()
+                var expresion=esExpresion()
 
                 if (expresion != null){
 
@@ -536,13 +683,13 @@ class AnalizadorSintactico(var listaTokens:ArrayList<Token>) {
     <Sino> ::= “else”  “{”<ListaSentencias> “}”
      */
     fun esDecicionSimple():Decision?{
-        if (tokenActual.categoria == Categoria.FIN_SENTENCIA) obtenerSiguienteToken()
+        while (tokenActual.categoria == Categoria.FIN_SENTENCIA) obtenerSiguienteToken()
 
         if (tokenActual.categoria == Categoria.PALABRA_RESERVADA && tokenActual.lexema == "if"){
             obtenerSiguienteToken()
             if (tokenActual.categoria == Categoria.PARENTESIS_IZQUIERDO){
                 obtenerSiguienteToken()
-                var expLogica: ExpresionLogica?= ExpresionLogica()//esExpresionLogica()
+                var expLogica: ExpresionLogica?=esExpresionLogica()
 
                 if (expLogica != null){
                     if (tokenActual.categoria == Categoria.PARENTESIS_DERECHO) {
@@ -579,7 +726,7 @@ class AnalizadorSintactico(var listaTokens:ArrayList<Token>) {
                                 }
 
                             }else{
-                                reportarError("Falta la lalve erecha del if","Decision")
+                                reportarError("Falta la lalve derecha del if","Decision")
                             }
                         }else{
                             reportarError("Falta la lleve izquierda del if","Decision")
@@ -602,7 +749,35 @@ class AnalizadorSintactico(var listaTokens:ArrayList<Token>) {
      * <ExpresionLogica> <ExpresionRelacional>  [<OperadorLogico><ExpresionLogica>]
      */
     fun esExpresionLogica():ExpresionLogica?{
+        var operadorUnario:Token?=null
 
+        if (tokenActual.categoria == Categoria.OPERADOR_LOGICO_UNARIO) {
+            operadorUnario=tokenActual
+            obtenerSiguienteToken()
+        }
+
+        var expRelacional:ExpresionRelacional?=esExpresionRelacional()
+
+        if (expRelacional != null){
+            //obtenerSiguienteToken()
+
+            if (tokenActual.categoria == Categoria.OPERADOR_LOGICO_BINARIO){
+                var operadorBinario=tokenActual
+                obtenerSiguienteToken()
+                var expresionLogica=esExpresionLogica()
+
+                if (expresionLogica != null){
+                    return ExpresionLogica(expRelacional,operadorBinario, expresionLogica)
+                }else{
+                    reportarError("Falta la expresion logica despues del operador logico","Expresion Logica")
+                }
+            }else{
+                return ExpresionLogica(operadorUnario,expRelacional)
+            }
+
+        }else{
+            reportarError("Falta la expresion relacional de la expresion logica","Expresion Logica")
+        }
     return null
     }
 }

@@ -37,6 +37,13 @@ class InicioController : Initializable{
     @FXML lateinit var clColumnaES:TableColumn<Error,Int>
     @FXML lateinit var clCategoriaES:TableColumn<Error,String>
 
+    //Errores Lexicos
+    @FXML lateinit var tblErroresLexicos :TableView<Error>
+    @FXML lateinit var clMensajeEL:TableColumn<Error,String>
+    @FXML lateinit var clFilaEL:TableColumn<Error,Int>
+    @FXML lateinit var clColumnaEL:TableColumn<Error,Int>
+    @FXML lateinit var clCategoriaEL:TableColumn<Error,String>
+
     // Arbol Sintactico
     @FXML lateinit var tvArbol:TreeView<String>
 
@@ -51,6 +58,11 @@ class InicioController : Initializable{
         clColumnaES.cellValueFactory=PropertyValueFactory("columna")
         clCategoriaES.cellValueFactory=PropertyValueFactory("categoria")
 
+        clMensajeEL.cellValueFactory=PropertyValueFactory("error")
+        clFilaEL.cellValueFactory=PropertyValueFactory("fila")
+        clColumnaEL.cellValueFactory=PropertyValueFactory("columna")
+        clCategoriaEL.cellValueFactory=PropertyValueFactory("categoria")
+
 
         leerDatos();
     }
@@ -62,6 +74,8 @@ class InicioController : Initializable{
     fun Limpiar(){
         taCodigoFuente.text=""
         tblTokens.items=FXCollections.observableArrayList(ArrayList<Token>())
+        tblErroresLexicos.items=FXCollections.observableArrayList(ArrayList<Error>())
+        tblErroresSintacticos.items=FXCollections.observableArrayList(ArrayList<Error>())
     }
 
     /**
@@ -75,6 +89,7 @@ class InicioController : Initializable{
             lexico.Analizar()
 
             tblTokens.items=FXCollections.observableArrayList(lexico.listaTokens)
+            tblErroresLexicos.items=FXCollections.observableArrayList(lexico.listaErrores)
 
             if (lexico.listaErrores.isEmpty()) {
                 var sintaxis = AnalizadorSintactico(lexico.listaTokens)

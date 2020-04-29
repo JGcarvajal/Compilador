@@ -1,5 +1,8 @@
 package co.edu.uniquindio.compilador.Analizador_Lexico
 
+import co.edu.uniquindio.compilador.Miscelaneos.Error
+
+
 class AnalizadorLexico (var codigoFuente:String) {
     var caracterActual =codigoFuente[0]
     var listaTokens=ArrayList<Token>()
@@ -8,7 +11,7 @@ class AnalizadorLexico (var codigoFuente:String) {
     var filaActual=0
     var columnaActual=0
     val operadoresArit = ArrayList<Char>()
-    var listaErrores =ArrayList<String>()
+    var listaErrores =ArrayList<Error>()
     /**
      * Este metodo nos permite analizar el texto que se ha ingresado
      */
@@ -41,7 +44,8 @@ class AnalizadorLexico (var codigoFuente:String) {
             if (esOperadorIncremento()) continue
             if (esCaracter()) continue
 
-            almacenarToken(""+caracterActual,Categoria.DESCONOCIDO,filaActual,columnaActual)
+            //almacenarToken(""+caracterActual,Categoria.DESCONOCIDO,filaActual,columnaActual)
+            reportarError("Caracter desconocido, lexema: "+caracterActual)
             obtenerSiguienteCaracter()
         }
     }
@@ -216,6 +220,8 @@ class AnalizadorLexico (var codigoFuente:String) {
         palabrasRes.add("if")
         palabrasRes.add("else")
         palabrasRes.add("int")
+        palabrasRes.add("return")
+        palabrasRes.add("meantime")
 
 
         if(caracterActual.isLetter()){
@@ -370,17 +376,20 @@ class AnalizadorLexico (var codigoFuente:String) {
 
         if (operadoresLog.contains(caracterActual)) {
             lexema+=caracterActual
-            obtenerSiguienteCaracter()
 
-            if (operadoresLog.contains(caracterActual)){
-                lexema+=caracterActual
-                almacenarToken(lexema, Categoria.DESCONOCIDO, filaActual, columnaActual)
+            if (lexema.equals( "&") or lexema.equals("|")){
+
+                almacenarToken(lexema, Categoria.OPERADOR_LOGICO_BINARIO, filaActual, columnaActual)
+                obtenerSiguienteCaracter()
+                return true
+            }else{
+                almacenarToken(lexema, Categoria.OPERADOR_LOGICO_UNARIO, filaActual, columnaActual)
                 obtenerSiguienteCaracter()
                 return true
             }
-            almacenarToken(lexema, Categoria.OPERADOR_LOGICO, filaActual, columnaActual)
 
-            return true
+
+
         }
 
         return false
@@ -637,5 +646,11 @@ class AnalizadorLexico (var codigoFuente:String) {
         }
     }
 
+    /**
+     * Este metodo permite agregar un error a la lista de errores
+     */
+    fun reportarError( mensaje:String){
+        listaErrores.add( Error(mensaje,filaActual,columnaActual, Categoria.ERROR.toString()))
+    }
 
 }

@@ -1,6 +1,7 @@
 package co.edu.uniquindio.compilador.Analizador_Sintactico
 
 import co.edu.uniquindio.compilador.Analizador_Lexico.Token
+import javafx.scene.control.TreeItem
 import kotlin.math.exp
 
 class ExpresionAritmetica():Expresion() {
@@ -10,14 +11,14 @@ class ExpresionAritmetica():Expresion() {
     var valorNumerico:ValorNumerico?=null
 
     constructor(expAritmetica1:ExpresionAritmetica, operador:Token,expAritmetica2: ExpresionAritmetica):this(){
-        this.expresionAritmetica1=expresionAritmetica1
+        this.expresionAritmetica1=expAritmetica1
         this.operador=operador
-        this.expresionAritmetica2=expresionAritmetica2
+        this.expresionAritmetica2=expAritmetica2
     }
-    constructor(varloNumerico:ValorNumerico, operador:Token,expAritmetica2: ExpresionAritmetica):this(){
+    constructor(valorNumerico:ValorNumerico, operador:Token,expAritmetica2: ExpresionAritmetica):this(){
         this.valorNumerico=valorNumerico
         this.operador=operador
-        this.expresionAritmetica2=expresionAritmetica2
+        this.expresionAritmetica2=expAritmetica2
     }
     constructor(expAritmetica: ExpresionAritmetica):this(){
         this.expresionAritmetica1= expAritmetica
@@ -31,5 +32,28 @@ class ExpresionAritmetica():Expresion() {
         return "ExpresionAritmetica(expresionAritmetica1=$expresionAritmetica1, expresionAritmetica2=$expresionAritmetica2, operador=$operador, valorNumerico=$valorNumerico)"
     }
 
+    override fun getArbolVisual(): TreeItem<String> {
+        var raiz= TreeItem<String>("Expresion Aritmetica")
 
+        if (expresionAritmetica1 != null && expresionAritmetica2 != null ){
+            raiz.children.add(expresionAritmetica1!!.getArbolVisual())
+            raiz.children.add(TreeItem("Operador: ${operador!!.lexema}"))
+            raiz.children.add(expresionAritmetica2!!.getArbolVisual())
+        }else{
+            if (valorNumerico != null && expresionAritmetica2 != null ){
+
+                raiz.children.add(valorNumerico!!.getArbolVisual())
+                raiz.children.add(TreeItem("Operador: ${operador!!.lexema}"))
+                raiz.children.add(expresionAritmetica2!!.getArbolVisual())
+
+            }else{
+                if (valorNumerico != null){
+                    raiz.children.add(valorNumerico!!.getArbolVisual())
+                }
+            }
+        }
+
+
+        return raiz
+    }
 }
