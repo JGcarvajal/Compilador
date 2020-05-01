@@ -6,9 +6,11 @@ import javafx.scene.control.TreeItem
 /**
  * Esta es la clase que nos permite representar uan funcion dentro del lenguaje propuesto
  */
-class Funcion (var nombreFuncion:Token, var tipoRetorno: Token, var listaParametros: ArrayList<Parametro>, var listaSentencias: ArrayList<Sentencia>) {
+class Funcion (var nombreFuncion:Token, var tipoRetorno: Token, var listaParametros: ArrayList<Parametro>,
+               var listaSentencias: ArrayList<Sentencia>, var retorno:Expresion?) {
     override fun toString(): String {
-        return "Funcion(nombreFuncion=$nombreFuncion, tipoRetorno=$tipoRetorno, listaParametros=$listaParametros, listaSentencias=$listaSentencias), \n"
+        return "Funcion(nombreFuncion=$nombreFuncion, tipoRetorno=$tipoRetorno, listaParametros=$listaParametros," +
+                " listaSentencias=$listaSentencias, Retorno=$retorno), \n"
     }
 
     fun getArbolVisual(): TreeItem<String> {
@@ -28,6 +30,12 @@ class Funcion (var nombreFuncion:Token, var tipoRetorno: Token, var listaParamet
             raizSentencias.children.add(s.getArbolVisual())
         }
         raiz.children.add(raizSentencias)
+
+        if (retorno != null){
+            var raizRetorno= TreeItem<String>("Retorno")
+            raizRetorno.children.add(retorno!!.getArbolVisual())
+            raiz.children.add(raizRetorno)
+        }
 
         return raiz
     }

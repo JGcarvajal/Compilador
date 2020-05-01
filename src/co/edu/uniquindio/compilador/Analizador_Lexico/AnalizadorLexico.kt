@@ -222,6 +222,10 @@ class AnalizadorLexico (var codigoFuente:String) {
         palabrasRes.add("int")
         palabrasRes.add("return")
         palabrasRes.add("meantime")
+        palabrasRes.add("try")
+        palabrasRes.add("catch")
+        palabrasRes.add("exception")
+        palabrasRes.add("break")
 
 
         if(caracterActual.isLetter()){
@@ -312,7 +316,7 @@ class AnalizadorLexico (var codigoFuente:String) {
             lexema+=caracterActual
             obtenerSiguienteCaracter()
 
-            if (operadoresArit.contains(caracterActual)){
+            if (operadoresArit.contains(caracterActual) || caracterActual == '='){
 
                 hacerBT(posicionInicial,filaInicial,columnaInicial)
                 return false

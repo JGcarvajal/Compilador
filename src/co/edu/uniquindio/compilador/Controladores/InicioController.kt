@@ -76,6 +76,7 @@ class InicioController : Initializable{
         tblTokens.items=FXCollections.observableArrayList(ArrayList<Token>())
         tblErroresLexicos.items=FXCollections.observableArrayList(ArrayList<Error>())
         tblErroresSintacticos.items=FXCollections.observableArrayList(ArrayList<Error>())
+        tvArbol.root=TreeItem()
     }
 
     /**

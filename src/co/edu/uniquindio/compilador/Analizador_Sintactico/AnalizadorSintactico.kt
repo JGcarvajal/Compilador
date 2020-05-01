@@ -34,20 +34,36 @@ class AnalizadorSintactico(var listaTokens:ArrayList<Token>) {
                 if (tokenActual.categoria == Categoria.IDENTIFICADOR) {
                     var nombreClase = tokenActual
                     obtenerSiguienteToken()
-                    if (tokenActual.categoria == Categoria.LLAVE_IZQUIERDA) {
+
+                    if (tokenActual.categoria ==Categoria.PARENTESIS_IZQUIERDO) {
                         obtenerSiguienteToken()
-                        var listaFunciones = esListaFunciones()
-                        if (tokenActual.categoria == Categoria.LLAVE_DERECHA){
-                            if (listaFunciones.size > 0) {
-                              return UnidadCompilacion(listaFunciones)
-                            }else{
-                                reportarError("Falta la lista de funciones","Unidad de Compilacion")
+
+                        if (tokenActual.categoria == Categoria.PARENTESIS_DERECHO) {
+                            obtenerSiguienteToken()
+
+                            if (tokenActual.categoria == Categoria.LLAVE_IZQUIERDA) {
+                                obtenerSiguienteToken()
+                                var listaFunciones = esListaFunciones()
+                                if (tokenActual.categoria == Categoria.LLAVE_DERECHA) {
+                                    if (listaFunciones.size > 0) {
+                                        return UnidadCompilacion(listaFunciones)
+                                    } else {
+                                        reportarError("Falta la lista de funciones", "Unidad de Compilacion")
+                                    }
+                                } else {
+                                    reportarError(
+                                        "Falta la llave de cierre de la undad de compilacion",
+                                        "Unidad de Compilacion"
+                                    )
+                                }
+                            } else {
+                                reportarError("Falta la llave de apertura de la clase", "Unidad de Compilacion")
                             }
                         }else{
-                            reportarError("Falta la llave de cierre de la undad de compilacion","Unidad de Compilacion")
+                            reportarError("Falta el parentesis derecho de la clase","Unidad de Compilacion")
                         }
                     }else{
-                        reportarError("Falta la llave de apertura de la funcion","Unidad de Compilacion")
+                        reportarError("Falta el parentesis izquierdo de la clase","Unidad de Compilacion")
                     }
                 }else{
                     reportarError("Falta un nombre de la clase valido","Unidad de Compilacion")
@@ -82,6 +98,8 @@ class AnalizadorSintactico(var listaTokens:ArrayList<Token>) {
      * <Funcion> ::= <modificadorAcceso> “function”  <Return> <Identificador> “(” ”)” “{“<ListaSentencias> [ “return” <Expresion>]  “}”
      */
     fun esFuncion():Funcion? {
+        while (tokenActual.categoria == Categoria.FIN_SENTENCIA) obtenerSiguienteToken()
+
         if (esModificadorAcceso()!= null) {
             obtenerSiguienteToken()
             if (tokenActual.categoria == Categoria.PALABRA_RESERVADA && tokenActual.lexema.toLowerCase() == "function") {
@@ -105,12 +123,12 @@ class AnalizadorSintactico(var listaTokens:ArrayList<Token>) {
 
                                     var listaSentencias= esListaSentencias()
                                     //obtenerSiguienteToken()
-
+                                    var retorno:Expresion?=null
                                     if (tokenActual.categoria == Categoria.PALABRA_RESERVADA && tokenActual.lexema.toLowerCase() == "return" ){
                                         obtenerSiguienteToken()
-                                        var expresion = esExpresion()
+                                        retorno = esExpresion()
 
-                                        if (expresion == null){
+                                        if (retorno == null){
                                             reportarError("Falta la expresion de retorno de la funcion","Funciones")
                                             return null
                                         }
@@ -121,11 +139,11 @@ class AnalizadorSintactico(var listaTokens:ArrayList<Token>) {
                                     }
 
 
-                                    //obtenerSiguienteToken()
+                                    obtenerSiguienteToken()
 
                                     if (tokenActual.categoria == Categoria.LLAVE_DERECHA) {
 
-                                        return Funcion(nombreFuncion ,tipoRetorno,listaParametros,listaSentencias)
+                                        return Funcion(nombreFuncion ,tipoRetorno,listaParametros,listaSentencias,retorno)
                                     }else{
                                         reportarError("Falta la llave derecha de la funcion","Funciones")
                                     }
@@ -271,6 +289,10 @@ class AnalizadorSintactico(var listaTokens:ArrayList<Token>) {
     fun esInvocacionFuncion(): Invocacion? {
         while (tokenActual.categoria == Categoria.FIN_SENTENCIA) obtenerSiguienteToken()
 
+        if ( listaTokens[posicionActual+1].categoria != Categoria.OPERADOR_ASIGNACION  && listaTokens[posicionActual+1].categoria != Categoria.OPERADOR_DECREMENTO
+            && listaTokens[posicionActual+1].categoria != Categoria.OPERADOR_INCREMENTO){
+
+
         if (tokenActual.categoria == Categoria.IDENTIFICADOR) {
             val nombreFuncion = tokenActual
             obtenerSiguienteToken()
@@ -291,6 +313,7 @@ class AnalizadorSintactico(var listaTokens:ArrayList<Token>) {
             } else {
                 reportarError("Falta paréntesis izquierdo","Invocacion Funcion")
             }
+        }
         }
         return null
     }
@@ -488,47 +511,106 @@ class AnalizadorSintactico(var listaTokens:ArrayList<Token>) {
         sentencia=esInvocacionFuncion()
         if (sentencia != null) return sentencia
 
+        sentencia=esIncremento()
+        if (sentencia != null) return sentencia
+
+        sentencia=esDecremento()
+        if (sentencia != null) return sentencia
+
         return null
     }
 
+    fun esIncremento():Incremento?{
+        while (tokenActual.categoria == Categoria.FIN_SENTENCIA) obtenerSiguienteToken()
+
+        if ( listaTokens[posicionActual+1].categoria != Categoria.PARENTESIS_IZQUIERDO
+            && listaTokens[posicionActual+1].categoria != Categoria.OPERADOR_DECREMENTO){
+
+            if (tokenActual.categoria== Categoria.IDENTIFICADOR){
+                var nombre=tokenActual
+                obtenerSiguienteToken()
+                if (tokenActual.categoria== Categoria.OPERADOR_INCREMENTO){
+                    var operador = tokenActual
+                    obtenerSiguienteToken()
+
+                    if (tokenActual.categoria == Categoria.FIN_SENTENCIA){
+                        return Incremento(nombre,operador)
+                    }else{
+                        reportarError("Falta el fin de sentencia en la operacion de Incremento","Sentencia de Incremento")
+                    }
+                }
+            }
+
+        }
+        return null
+    }
+
+    fun esDecremento():Decremento?{
+        while (tokenActual.categoria == Categoria.FIN_SENTENCIA) obtenerSiguienteToken()
+
+        if ( listaTokens[posicionActual+1].categoria != Categoria.PARENTESIS_IZQUIERDO
+            && listaTokens[posicionActual+1].categoria != Categoria.OPERADOR_INCREMENTO){
+
+            if (tokenActual.categoria== Categoria.IDENTIFICADOR){
+                var nombre=tokenActual
+                obtenerSiguienteToken()
+                if (tokenActual.categoria== Categoria.OPERADOR_DECREMENTO){
+                    var operador = tokenActual
+                    obtenerSiguienteToken()
+
+                    if (tokenActual.categoria == Categoria.FIN_SENTENCIA){
+                        return Decremento(nombre,operador)
+                    }else{
+                        reportarError("Falta el fin de sentencia de la expresion de decremente","Sentencia de Decremento")
+                    }
+                }
+            }
+
+        }
+        return null
+    }
     /***
      *<Declaracion> ::= [<ModificadorAcceso>] <TipoDato> <Identificador> [<OperadorAsignacion> <TipoAsignacion>]
      */
     fun esDeclaracion():Declaracion?{
         while (tokenActual.categoria == Categoria.FIN_SENTENCIA) obtenerSiguienteToken()
 
-        var modAcceso=esModificadorAcceso()
-        if (modAcceso != null) obtenerSiguienteToken()
+        if ( listaTokens[posicionActual+1].categoria != Categoria.PARENTESIS_IZQUIERDO
+            && listaTokens[posicionActual+1].categoria != Categoria.OPERADOR_INCREMENTO && listaTokens[posicionActual+1].categoria != Categoria.OPERADOR_DECREMENTO) {
 
-        var tipoDato=esTipoParametro()
+            var modAcceso = esModificadorAcceso()
+            if (modAcceso != null) obtenerSiguienteToken()
 
-        if (tipoDato != null){
-            obtenerSiguienteToken()
+            var tipoDato = esTipoParametro()
 
-            if (tokenActual.categoria == Categoria.IDENTIFICADOR) {
-                var nombre = tokenActual
+            if (tipoDato != null) {
                 obtenerSiguienteToken()
 
-                if (tokenActual.categoria == Categoria.OPERADOR_ASIGNACION){
-                    var opAsignacion=tokenActual
+                if (tokenActual.categoria == Categoria.IDENTIFICADOR) {
+                    var nombre = tokenActual
                     obtenerSiguienteToken()
-                    var expresion=esExpresion()
 
-                    if (expresion != null){
-                        var asignacion=Asignacion(nombre,opAsignacion,expresion)
-                        return Declaracion(modAcceso,tipoDato,nombre,asignacion)
-                    }else{
-                        reportarError("Falta la expresion de asignacion de la declaracion","Declaracion")
+                    if (tokenActual.categoria == Categoria.OPERADOR_ASIGNACION) {
+                        var opAsignacion = tokenActual
+                        obtenerSiguienteToken()
+                        var expresion = esExpresion()
+
+                        if (expresion != null) {
+                            var asignacion = Asignacion(nombre, opAsignacion, expresion)
+                            return Declaracion(modAcceso, tipoDato, nombre, asignacion)
+                        } else {
+                            reportarError("Falta la expresion de asignacion de la declaracion", "Declaracion")
+                        }
+
+                    } else {
+                        return Declaracion(modAcceso, tipoDato, nombre, null)
                     }
 
-                }else{
-                    return Declaracion(modAcceso,tipoDato,nombre,null)
+                } else {
+                    reportarError("Falta el identificador del la declaracion", "Declaracion")
                 }
 
-            }else{
-                reportarError("Falta el identificador del la declaracion","Declaracion")
             }
-
         }
 
         return null
@@ -649,7 +731,10 @@ class AnalizadorSintactico(var listaTokens:ArrayList<Token>) {
     fun esAsignacion():Sentencia?{
         while (tokenActual.categoria == Categoria.FIN_SENTENCIA) obtenerSiguienteToken()
 
-        if (tokenActual.categoria== Categoria.IDENTIFICADOR && listaTokens[posicionActual+1].categoria != Categoria.PARENTESIS_IZQUIERDO ){
+        if ( listaTokens[posicionActual+1].categoria != Categoria.PARENTESIS_IZQUIERDO  && listaTokens[posicionActual+1].categoria != Categoria.OPERADOR_DECREMENTO
+            && listaTokens[posicionActual+1].categoria != Categoria.OPERADOR_INCREMENTO){
+
+        if (tokenActual.categoria== Categoria.IDENTIFICADOR){
             var nombre=tokenActual
             obtenerSiguienteToken()
 
@@ -674,7 +759,7 @@ class AnalizadorSintactico(var listaTokens:ArrayList<Token>) {
                 reportarError("Falta el operador de asinacion de la asignacion","Asignacion")
             }
 
-        }
+        }}
         return null
     }
 
