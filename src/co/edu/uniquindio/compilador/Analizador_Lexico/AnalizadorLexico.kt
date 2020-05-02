@@ -226,6 +226,7 @@ class AnalizadorLexico (var codigoFuente:String) {
         palabrasRes.add("catch")
         palabrasRes.add("exception")
         palabrasRes.add("break")
+        palabrasRes.add("finally")
 
 
         if(caracterActual.isLetter()){

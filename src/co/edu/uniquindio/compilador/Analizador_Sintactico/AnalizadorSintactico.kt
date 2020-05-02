@@ -44,18 +44,21 @@ class AnalizadorSintactico(var listaTokens:ArrayList<Token>) {
                             if (tokenActual.categoria == Categoria.LLAVE_IZQUIERDA) {
                                 obtenerSiguienteToken()
                                 var listaFunciones = esListaFunciones()
+                                while (tokenActual.categoria == Categoria.FIN_SENTENCIA) obtenerSiguienteToken()
                                 if (tokenActual.categoria == Categoria.LLAVE_DERECHA) {
                                     if (listaFunciones.size > 0) {
                                         return UnidadCompilacion(listaFunciones)
                                     } else {
                                         reportarError("Falta la lista de funciones", "Unidad de Compilacion")
                                     }
+                                    while (tokenActual.categoria == Categoria.FIN_SENTENCIA) obtenerSiguienteToken()
                                 } else {
                                     reportarError(
                                         "Falta la llave de cierre de la undad de compilacion",
                                         "Unidad de Compilacion"
                                     )
                                 }
+                                while (tokenActual.categoria == Categoria.FIN_SENTENCIA) obtenerSiguienteToken()
                             } else {
                                 reportarError("Falta la llave de apertura de la clase", "Unidad de Compilacion")
                             }
@@ -83,6 +86,7 @@ class AnalizadorSintactico(var listaTokens:ArrayList<Token>) {
       */
     fun esListaFunciones():ArrayList<Funcion>{
         var listaFunciones= ArrayList<Funcion>()
+        while (tokenActual.categoria == Categoria.FIN_SENTENCIA) obtenerSiguienteToken()
         var funcion=esFuncion()
 
         while (funcion != null){
@@ -140,6 +144,7 @@ class AnalizadorSintactico(var listaTokens:ArrayList<Token>) {
 
 
                                     obtenerSiguienteToken()
+                                    while (tokenActual.categoria == Categoria.FIN_SENTENCIA) obtenerSiguienteToken()
 
                                     if (tokenActual.categoria == Categoria.LLAVE_DERECHA) {
 
@@ -147,7 +152,7 @@ class AnalizadorSintactico(var listaTokens:ArrayList<Token>) {
                                     }else{
                                         reportarError("Falta la llave derecha de la funcion","Funciones")
                                     }
-
+                                    while (tokenActual.categoria == Categoria.FIN_SENTENCIA) obtenerSiguienteToken()
                                 }else{
                                     reportarError("Falta la llave izquierda de la funcion","Funciones")
                                 }
@@ -517,9 +522,110 @@ class AnalizadorSintactico(var listaTokens:ArrayList<Token>) {
         sentencia=esDecremento()
         if (sentencia != null) return sentencia
 
+        sentencia=esTRyCatch()
+        if (sentencia != null) return sentencia
+
         return null
     }
 
+    /***
+     * <TryCatch>::= “try” “{“ [<ListaSentencias> ]  “}”  <catch> [<finally>]
+        <catch>::= “catch””(“ <Parametro> “)”  “{“ [<ListaSentencias> ] “}” [<catch>]
+        <finally>::= “finally” “{“ [<ListaSentencias> ] “}”
+     */
+    fun esTRyCatch():TryCatch?{
+        while (tokenActual.categoria == Categoria.FIN_SENTENCIA) obtenerSiguienteToken()
+
+        if (tokenActual.categoria == Categoria.PALABRA_RESERVADA && tokenActual.lexema.toLowerCase() == "try"){
+            obtenerSiguienteToken()
+
+            if (tokenActual.categoria == Categoria.LLAVE_IZQUIERDA){
+                obtenerSiguienteToken()
+
+                var sentencias=esListaSentencias()
+
+                if (tokenActual.categoria == Categoria.LLAVE_DERECHA){
+                    obtenerSiguienteToken()
+                    while (tokenActual.categoria == Categoria.FIN_SENTENCIA) obtenerSiguienteToken()
+                    if (tokenActual.categoria == Categoria.PALABRA_RESERVADA && tokenActual.lexema.toLowerCase() == "catch"){
+                        obtenerSiguienteToken()
+
+                        if (tokenActual.categoria == Categoria.PARENTESIS_IZQUIERDO){
+                            obtenerSiguienteToken()
+
+                            if (tokenActual.categoria == Categoria.PALABRA_RESERVADA && tokenActual.lexema.toLowerCase().contains("exception")){
+                                var tipoExcepcion=tokenActual
+                                obtenerSiguienteToken()
+
+                                if (tokenActual.categoria == Categoria.IDENTIFICADOR){
+                                    var nombreExcepcion=tokenActual
+                                    obtenerSiguienteToken()
+
+                                    if (tokenActual.categoria == Categoria.PARENTESIS_DERECHO){
+                                        obtenerSiguienteToken()
+
+                                        if (tokenActual.categoria == Categoria.LLAVE_IZQUIERDA){
+                                            obtenerSiguienteToken()
+
+                                            var sentenciasCatch=esListaSentencias()
+                                            while (tokenActual.categoria == Categoria.FIN_SENTENCIA) obtenerSiguienteToken()
+
+                                            if (tokenActual.categoria == Categoria.LLAVE_DERECHA){
+                                                obtenerSiguienteToken()
+                                                while (tokenActual.categoria == Categoria.FIN_SENTENCIA) obtenerSiguienteToken()
+                                                if (tokenActual.categoria == Categoria.PALABRA_RESERVADA && tokenActual.lexema.toLowerCase() == "finally"){
+                                                    obtenerSiguienteToken()
+                                                    while (tokenActual.categoria == Categoria.FIN_SENTENCIA) obtenerSiguienteToken()
+
+                                                    if (tokenActual.categoria == Categoria.LLAVE_IZQUIERDA) {
+                                                        obtenerSiguienteToken()
+                                                        var sentenciasFinally = esListaSentencias()
+                                                        while (tokenActual.categoria == Categoria.FIN_SENTENCIA) obtenerSiguienteToken()
+
+                                                        if (tokenActual.categoria == Categoria.LLAVE_DERECHA){
+                                                            return TryCatch(sentencias,tipoExcepcion,nombreExcepcion,sentenciasCatch,sentenciasFinally)
+                                                        }else{
+                                                            reportarError("Falta la llave de cierre del Finally","TryCatch")
+                                                        }
+                                                    }else{
+                                                        reportarError("Falta la llave de apertura del Finally","TryCatch")
+                                                    }
+                                                }else{
+                                                    return TryCatch(sentencias,tipoExcepcion,nombreExcepcion,sentenciasCatch,null)
+                                                }
+                                            }else{
+                                                reportarError("Falta la llave de cierre del Catch","TryCatch")
+                                            }
+                                        }else{
+                                            reportarError("Falta la llave de apertura del Catch","TryCatch")
+                                        }
+                                    }else{
+                                        reportarError("Falta el parentesis de cierre del Catch","TryCatch")
+                                    }
+                                }else{
+                                    reportarError("Falta el identificador del Catch","TryCatch")
+                                }
+                            }else{
+                                reportarError("Falta el tipo de Excepcion del Catch","TryCatch")
+                            }
+                        }else{
+                            reportarError("Falta parentesis de apertura del Catch","TryCatch")
+                        }
+                    }else{
+                        reportarError("Falta la sentencia 'Catch' del Try","TryCatch")
+                    }
+                }else{
+                    reportarError("Falta la llave de cierre del Try","TryCatch")
+                }
+            }else{
+                reportarError("Falta la llave de apertura del Try","TryCatch")
+            }
+        }
+        return null
+    }
+    /***
+     * <esIncremento> ::= "Identidicador" "--" <Expresion>
+     */
     fun esIncremento():Incremento?{
         while (tokenActual.categoria == Categoria.FIN_SENTENCIA) obtenerSiguienteToken()
 
@@ -545,6 +651,9 @@ class AnalizadorSintactico(var listaTokens:ArrayList<Token>) {
         return null
     }
 
+    /***
+     * <esDecremento> ::= "Identidicador" "--" <Expresion>
+     */
     fun esDecremento():Decremento?{
         while (tokenActual.categoria == Categoria.FIN_SENTENCIA) obtenerSiguienteToken()
 
@@ -793,7 +902,7 @@ class AnalizadorSintactico(var listaTokens:ArrayList<Token>) {
                                         var sentenciasElse = esListaSentencias()
 
                                         if (tokenActual.categoria == Categoria.LLAVE_DERECHA) {
-                                            obtenerSiguienteToken()
+
                                             if (sentenciasElse != null) {
                                                 obtenerSiguienteToken()
                                                 return Decision(expLogica, sentencias, sentenciasElse)
