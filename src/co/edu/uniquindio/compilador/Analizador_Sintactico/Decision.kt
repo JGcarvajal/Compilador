@@ -9,7 +9,7 @@ class Decision(var expresionLogina:ExpresionLogica, var listaSentecias: ArrayLis
 
     override fun getArbolVisual(): TreeItem<String> {
 
-        var raiz= TreeItem<String>("Expresion Logica")
+        var raiz= TreeItem<String>("Decision Simple")
         var condicion= TreeItem<String>("Condiciones")
 
         condicion.children.add(expresionLogina.getArbolVisual())

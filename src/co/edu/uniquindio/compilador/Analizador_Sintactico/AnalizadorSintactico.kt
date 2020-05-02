@@ -297,7 +297,7 @@ class AnalizadorSintactico(var listaTokens:ArrayList<Token>) {
      */
     fun esInvocacionFuncion(): Invocacion? {
         while (tokenActual.categoria == Categoria.FIN_SENTENCIA) obtenerSiguienteToken()
-
+        try{
         if ( listaTokens[posicionActual+1].categoria != Categoria.OPERADOR_ASIGNACION  && listaTokens[posicionActual+1].categoria != Categoria.OPERADOR_DECREMENTO
             && listaTokens[posicionActual+1].categoria != Categoria.OPERADOR_INCREMENTO){
 
@@ -311,7 +311,7 @@ class AnalizadorSintactico(var listaTokens:ArrayList<Token>) {
                 if (tokenActual.categoria == Categoria.PARENTESIS_DERECHO) {
                     obtenerSiguienteToken()
                     if (tokenActual.categoria == Categoria.FIN_SENTENCIA) {
-                        obtenerSiguienteToken()
+
                         return Invocacion(nombreFuncion, listaArgumentos)
                     } else {
                         reportarError("Falta fin de sentencia","Invocacion Funcion")
@@ -323,6 +323,9 @@ class AnalizadorSintactico(var listaTokens:ArrayList<Token>) {
                 reportarError("Falta paréntesis izquierdo","Invocacion Funcion")
             }
         }
+        }
+        }catch (ex:Exception){
+
         }
         return null
     }
@@ -529,6 +532,7 @@ class AnalizadorSintactico(var listaTokens:ArrayList<Token>) {
         sentencia=esTRyCatch()
         if (sentencia != null) return sentencia
 
+
         return null
     }
 
@@ -636,7 +640,7 @@ class AnalizadorSintactico(var listaTokens:ArrayList<Token>) {
      */
     fun esIncremento():Incremento?{
         while (tokenActual.categoria == Categoria.FIN_SENTENCIA) obtenerSiguienteToken()
-
+        try{
         if ( listaTokens[posicionActual+1].categoria != Categoria.PARENTESIS_IZQUIERDO
             && listaTokens[posicionActual+1].categoria != Categoria.OPERADOR_DECREMENTO){
 
@@ -656,6 +660,9 @@ class AnalizadorSintactico(var listaTokens:ArrayList<Token>) {
             }
 
         }
+        }catch (ex:Exception){
+
+        }
         return null
     }
 
@@ -664,7 +671,7 @@ class AnalizadorSintactico(var listaTokens:ArrayList<Token>) {
      */
     fun esDecremento():Decremento?{
         while (tokenActual.categoria == Categoria.FIN_SENTENCIA) obtenerSiguienteToken()
-
+        try{
         if ( listaTokens[posicionActual+1].categoria != Categoria.PARENTESIS_IZQUIERDO
             && listaTokens[posicionActual+1].categoria != Categoria.OPERADOR_INCREMENTO){
 
@@ -684,6 +691,9 @@ class AnalizadorSintactico(var listaTokens:ArrayList<Token>) {
             }
 
         }
+        }catch (ex:Exception){
+
+        }
         return null
     }
     /***
@@ -691,7 +701,7 @@ class AnalizadorSintactico(var listaTokens:ArrayList<Token>) {
      */
     fun esDeclaracion():Declaracion?{
         while (tokenActual.categoria == Categoria.FIN_SENTENCIA) obtenerSiguienteToken()
-
+        try{
         if ( listaTokens[posicionActual+1].categoria != Categoria.PARENTESIS_IZQUIERDO
             && listaTokens[posicionActual+1].categoria != Categoria.OPERADOR_INCREMENTO && listaTokens[posicionActual+1].categoria != Categoria.OPERADOR_DECREMENTO) {
 
@@ -729,7 +739,9 @@ class AnalizadorSintactico(var listaTokens:ArrayList<Token>) {
 
             }
         }
+        }catch (ex:Exception){
 
+        }
         return null
     }
     /**
@@ -942,7 +954,7 @@ class AnalizadorSintactico(var listaTokens:ArrayList<Token>) {
                                 }
 
                             }else{
-                                reportarError("Falta la lalve derecha del if","Decision")
+                                reportarError("Falta la llave derecha del if","Decision")
                             }
                         }else{
                             reportarError("Falta la lleve izquierda del if","Decision")
