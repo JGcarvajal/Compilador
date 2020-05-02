@@ -55,7 +55,7 @@ class AnalizadorSintactico(var listaTokens:ArrayList<Token>) {
                                     while (tokenActual.categoria == Categoria.FIN_SENTENCIA) obtenerSiguienteToken()
                                 } else {
                                     reportarError(
-                                        "Falta la llave de cierre de la undad de compilacion",
+                                        "Falta la  llave de cierre de la undad de compilacion",
                                         "Unidad de Compilacion"
                                     )
                                 }
