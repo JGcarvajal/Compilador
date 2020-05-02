@@ -3,8 +3,7 @@ package co.edu.uniquindio.compilador.Analizador_Sintactico
 import co.edu.uniquindio.compilador.Analizador_Lexico.Categoria
 import co.edu.uniquindio.compilador.Analizador_Lexico.Token
 import co.edu.uniquindio.compilador.Miscelaneos.Error
-import javafx.css.Declaration
-import kotlin.math.exp
+
 
 class AnalizadorSintactico(var listaTokens:ArrayList<Token>) {
     var posicionActual=0
