@@ -40,11 +40,13 @@ class AnalizadorSintactico(var listaTokens:ArrayList<Token>) {
 
                         if (tokenActual.categoria == Categoria.PARENTESIS_DERECHO) {
                             obtenerSiguienteToken()
+                            while (tokenActual.categoria == Categoria.FIN_SENTENCIA) obtenerSiguienteToken()
 
                             if (tokenActual.categoria == Categoria.LLAVE_IZQUIERDA) {
                                 obtenerSiguienteToken()
                                 var listaFunciones = esListaFunciones()
                                 while (tokenActual.categoria == Categoria.FIN_SENTENCIA) obtenerSiguienteToken()
+
                                 if (tokenActual.categoria == Categoria.LLAVE_DERECHA) {
                                     if (listaFunciones.size > 0) {
                                         return UnidadCompilacion(listaFunciones)
@@ -122,6 +124,8 @@ class AnalizadorSintactico(var listaTokens:ArrayList<Token>) {
 
                             if (tokenActual.categoria == Categoria.PARENTESIS_DERECHO) {
                                 obtenerSiguienteToken()
+                                while (tokenActual.categoria == Categoria.FIN_SENTENCIA) obtenerSiguienteToken()
+
                                 if (tokenActual.categoria == Categoria.LLAVE_IZQUIERDA) {
                                     obtenerSiguienteToken()
 
@@ -538,11 +542,14 @@ class AnalizadorSintactico(var listaTokens:ArrayList<Token>) {
 
         if (tokenActual.categoria == Categoria.PALABRA_RESERVADA && tokenActual.lexema.toLowerCase() == "try"){
             obtenerSiguienteToken()
+            while (tokenActual.categoria == Categoria.FIN_SENTENCIA) obtenerSiguienteToken()
 
             if (tokenActual.categoria == Categoria.LLAVE_IZQUIERDA){
                 obtenerSiguienteToken()
 
                 var sentencias=esListaSentencias()
+                while (tokenActual.categoria == Categoria.FIN_SENTENCIA) obtenerSiguienteToken()
+
 
                 if (tokenActual.categoria == Categoria.LLAVE_DERECHA){
                     obtenerSiguienteToken()
@@ -563,6 +570,7 @@ class AnalizadorSintactico(var listaTokens:ArrayList<Token>) {
 
                                     if (tokenActual.categoria == Categoria.PARENTESIS_DERECHO){
                                         obtenerSiguienteToken()
+                                        while (tokenActual.categoria == Categoria.FIN_SENTENCIA) obtenerSiguienteToken()
 
                                         if (tokenActual.categoria == Categoria.LLAVE_IZQUIERDA){
                                             obtenerSiguienteToken()
@@ -753,10 +761,13 @@ class AnalizadorSintactico(var listaTokens:ArrayList<Token>) {
 
                                     if (tokenActual.categoria == Categoria.PARENTESIS_DERECHO) {
                                         obtenerSiguienteToken()
+                                        while (tokenActual.categoria == Categoria.FIN_SENTENCIA) obtenerSiguienteToken()
 
                                         if (tokenActual.categoria == Categoria.LLAVE_IZQUIERDA) {
                                             obtenerSiguienteToken()
                                             var listaSentencias = esListaSentencias()
+                                            while (tokenActual.categoria == Categoria.FIN_SENTENCIA) obtenerSiguienteToken()
+
 
                                             if (tokenActual.categoria == Categoria.LLAVE_DERECHA) {
                                                 return CicloForeach(lista, item, tipoDato,listaSentencias)
@@ -807,10 +818,14 @@ class AnalizadorSintactico(var listaTokens:ArrayList<Token>) {
                 if (expRelacional != null){
                     if (tokenActual.categoria == Categoria.PARENTESIS_DERECHO){
                         obtenerSiguienteToken()
+                        while (tokenActual.categoria == Categoria.FIN_SENTENCIA) obtenerSiguienteToken()
+
                         if (tokenActual.categoria == Categoria.LLAVE_IZQUIERDA){
                             obtenerSiguienteToken()
 
                             var sentencias=esListaSentencias()
+                            while (tokenActual.categoria == Categoria.FIN_SENTENCIA) obtenerSiguienteToken()
+
                             if (tokenActual.categoria == Categoria.LLAVE_DERECHA){
                                 obtenerSiguienteToken()
                                 return CicloWhile(expRelacional,sentencias)
@@ -888,18 +903,25 @@ class AnalizadorSintactico(var listaTokens:ArrayList<Token>) {
                 if (expLogica != null){
                     if (tokenActual.categoria == Categoria.PARENTESIS_DERECHO) {
                         obtenerSiguienteToken()
+                        while (tokenActual.categoria == Categoria.FIN_SENTENCIA) obtenerSiguienteToken()
+
                         if (tokenActual.categoria == Categoria.LLAVE_IZQUIERDA) {
                             obtenerSiguienteToken()
                             var sentencias=esListaSentencias()
+                            while (tokenActual.categoria == Categoria.FIN_SENTENCIA) obtenerSiguienteToken()
+
 
                             if (tokenActual.categoria == Categoria.LLAVE_DERECHA) {
                                 obtenerSiguienteToken()
 
                                 if (tokenActual.categoria == Categoria.PALABRA_RESERVADA && tokenActual.lexema == "else") {
                                     obtenerSiguienteToken()
+                                    while (tokenActual.categoria == Categoria.FIN_SENTENCIA) obtenerSiguienteToken()
+
                                     if (tokenActual.categoria == Categoria.LLAVE_IZQUIERDA) {
                                         obtenerSiguienteToken()
                                         var sentenciasElse = esListaSentencias()
+                                        while (tokenActual.categoria == Categoria.FIN_SENTENCIA) obtenerSiguienteToken()
 
                                         if (tokenActual.categoria == Categoria.LLAVE_DERECHA) {
 

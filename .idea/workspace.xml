@@ -4,9 +4,7 @@
     <list default="true" id="e3fe0db8-6343-48c3-aec1-87df656f4d2e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/CompiladorKotlin/co/edu/uniquindio/compilador/Analizador_Sintactico/AnalizadorSintactico.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CompiladorKotlin/co/edu/uniquindio/compilador/Analizador_Sintactico/AnalizadorSintactico.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/co/edu/uniquindio/compilador/Analizador_Lexico/AnalizadorLexico.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/co/edu/uniquindio/compilador/Analizador_Lexico/AnalizadorLexico.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/co/edu/uniquindio/compilador/Analizador_Sintactico/AnalizadorSintactico.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/co/edu/uniquindio/compilador/Analizador_Sintactico/AnalizadorSintactico.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/co/edu/uniquindio/compilador/Analizador_Sintactico/TryCatch.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/co/edu/uniquindio/compilador/Analizador_Sintactico/TryCatch.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -112,7 +110,7 @@
       <workItem from="1588107627726" duration="28493000" />
       <workItem from="1588174714096" duration="6250000" />
       <workItem from="1588261359383" duration="1301000" />
-      <workItem from="1588360978107" duration="17092000" />
+      <workItem from="1588360978107" duration="18154000" />
     </task>
     <servers />
   </component>
@@ -156,38 +154,38 @@
       <screen x="0" y="40" width="1366" height="728" />
     </state>
     <state x="509" y="305" key="Github.CreateGistDialog/0.40.1366.728@0.40.1366.728" timestamp="1585519351626" />
-    <state width="1323" height="41" key="GridCell.Tab.0.bottom" timestamp="1588434836946">
+    <state width="1323" height="41" key="GridCell.Tab.0.bottom" timestamp="1588436214170">
       <screen x="0" y="40" width="1366" height="728" />
     </state>
-    <state width="1323" height="41" key="GridCell.Tab.0.bottom/0.40.1366.728@0.40.1366.728" timestamp="1588434836946" />
-    <state width="1323" height="41" key="GridCell.Tab.0.center" timestamp="1588434836946">
+    <state width="1323" height="41" key="GridCell.Tab.0.bottom/0.40.1366.728@0.40.1366.728" timestamp="1588436214170" />
+    <state width="1323" height="41" key="GridCell.Tab.0.center" timestamp="1588436214169">
       <screen x="0" y="40" width="1366" height="728" />
     </state>
-    <state width="1323" height="41" key="GridCell.Tab.0.center/0.40.1366.728@0.40.1366.728" timestamp="1588434836946" />
-    <state width="1323" height="41" key="GridCell.Tab.0.left" timestamp="1588434836946">
+    <state width="1323" height="41" key="GridCell.Tab.0.center/0.40.1366.728@0.40.1366.728" timestamp="1588436214169" />
+    <state width="1323" height="41" key="GridCell.Tab.0.left" timestamp="1588436214169">
       <screen x="0" y="40" width="1366" height="728" />
     </state>
-    <state width="1323" height="41" key="GridCell.Tab.0.left/0.40.1366.728@0.40.1366.728" timestamp="1588434836946" />
-    <state width="1323" height="41" key="GridCell.Tab.0.right" timestamp="1588434836946">
+    <state width="1323" height="41" key="GridCell.Tab.0.left/0.40.1366.728@0.40.1366.728" timestamp="1588436214169" />
+    <state width="1323" height="41" key="GridCell.Tab.0.right" timestamp="1588436214169">
       <screen x="0" y="40" width="1366" height="728" />
     </state>
-    <state width="1323" height="41" key="GridCell.Tab.0.right/0.40.1366.728@0.40.1366.728" timestamp="1588434836946" />
-    <state width="1323" height="41" key="GridCell.Tab.1.bottom" timestamp="1588434845427">
+    <state width="1323" height="41" key="GridCell.Tab.0.right/0.40.1366.728@0.40.1366.728" timestamp="1588436214169" />
+    <state width="1323" height="41" key="GridCell.Tab.1.bottom" timestamp="1588436228148">
       <screen x="0" y="40" width="1366" height="728" />
     </state>
-    <state width="1323" height="41" key="GridCell.Tab.1.bottom/0.40.1366.728@0.40.1366.728" timestamp="1588434845427" />
-    <state width="1323" height="41" key="GridCell.Tab.1.center" timestamp="1588434845427">
+    <state width="1323" height="41" key="GridCell.Tab.1.bottom/0.40.1366.728@0.40.1366.728" timestamp="1588436228148" />
+    <state width="1323" height="41" key="GridCell.Tab.1.center" timestamp="1588436228147">
       <screen x="0" y="40" width="1366" height="728" />
     </state>
-    <state width="1323" height="41" key="GridCell.Tab.1.center/0.40.1366.728@0.40.1366.728" timestamp="1588434845427" />
-    <state width="1323" height="41" key="GridCell.Tab.1.left" timestamp="1588434845427">
+    <state width="1323" height="41" key="GridCell.Tab.1.center/0.40.1366.728@0.40.1366.728" timestamp="1588436228147" />
+    <state width="1323" height="41" key="GridCell.Tab.1.left" timestamp="1588436228147">
       <screen x="0" y="40" width="1366" height="728" />
     </state>
-    <state width="1323" height="41" key="GridCell.Tab.1.left/0.40.1366.728@0.40.1366.728" timestamp="1588434845427" />
-    <state width="1323" height="41" key="GridCell.Tab.1.right" timestamp="1588434845427">
+    <state width="1323" height="41" key="GridCell.Tab.1.left/0.40.1366.728@0.40.1366.728" timestamp="1588436228147" />
+    <state width="1323" height="41" key="GridCell.Tab.1.right" timestamp="1588436228148">
       <screen x="0" y="40" width="1366" height="728" />
     </state>
-    <state width="1323" height="41" key="GridCell.Tab.1.right/0.40.1366.728@0.40.1366.728" timestamp="1588434845427" />
+    <state width="1323" height="41" key="GridCell.Tab.1.right/0.40.1366.728@0.40.1366.728" timestamp="1588436228148" />
     <state x="163" y="40" key="SettingsEditor" timestamp="1588191726463">
       <screen x="0" y="40" width="1366" height="728" />
     </state>
@@ -210,12 +208,12 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="kotlin-line">
           <url>file://$PROJECT_DIR$/src/co/edu/uniquindio/compilador/Analizador_Sintactico/AnalizadorSintactico.kt</url>
-          <line>127</line>
+          <line>131</line>
           <option name="timeStamp" value="82" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="kotlin-line">
           <url>file://$PROJECT_DIR$/src/co/edu/uniquindio/compilador/Analizador_Sintactico/AnalizadorSintactico.kt</url>
-          <line>541</line>
+          <line>546</line>
           <option name="timeStamp" value="83" />
         </line-breakpoint>
       </breakpoints>
