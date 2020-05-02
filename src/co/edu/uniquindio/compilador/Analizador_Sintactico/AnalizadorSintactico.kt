@@ -320,7 +320,7 @@ class AnalizadorSintactico(var listaTokens:ArrayList<Token>) {
                     reportarError("Falta paréntesis derecho","Invocacion Funcion")
                 }
             } else {
-                reportarError("Falta paréntesis izquierdo ","Invocacion Funcion")
+                reportarError("Falta paréntesis izquierdo","Invocacion Funcion")
             }
         }
         }
