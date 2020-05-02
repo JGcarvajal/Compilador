@@ -3,7 +3,12 @@
   <component name="ChangeListManager">
     <list default="true" id="e3fe0db8-6343-48c3-aec1-87df656f4d2e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/Inicio.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/resources/Inicio.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CompiladorKotlin/co/edu/uniquindio/compilador/Analizador_Sintactico/AnalizadorSintactico.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CompiladorKotlin/co/edu/uniquindio/compilador/Analizador_Sintactico/AnalizadorSintactico.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/co/edu/uniquindio/compilador/Analizador_Sintactico/AnalizadorSintactico.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/co/edu/uniquindio/compilador/Analizador_Sintactico/AnalizadorSintactico.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/co/edu/uniquindio/compilador/Analizador_Sintactico/Asignacion.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/co/edu/uniquindio/compilador/Analizador_Sintactico/Asignacion.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/co/edu/uniquindio/compilador/Analizador_Sintactico/CicloForeach.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/co/edu/uniquindio/compilador/Analizador_Sintactico/CicloForeach.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/co/edu/uniquindio/compilador/Analizador_Sintactico/CicloWhile.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/co/edu/uniquindio/compilador/Analizador_Sintactico/CicloWhile.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/co/edu/uniquindio/compilador/Analizador_Sintactico/ExpresionCadena.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/co/edu/uniquindio/compilador/Analizador_Sintactico/ExpresionCadena.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -116,7 +121,7 @@
       <workItem from="1588107627726" duration="28493000" />
       <workItem from="1588174714096" duration="6250000" />
       <workItem from="1588261359383" duration="1301000" />
-      <workItem from="1588360978107" duration="25829000" />
+      <workItem from="1588360978107" duration="36148000" />
     </task>
     <task id="LOCAL-00001" summary="Pruba commit desde kt">
       <created>1588444345916</created>
@@ -125,7 +130,14 @@
       <option name="project" value="LOCAL" />
       <updated>1588444345917</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Cambio interfaz">
+      <created>1588444439422</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1588444439422</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -133,17 +145,18 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Pruba commit desde kt" />
-    <option name="LAST_COMMIT_MESSAGE" value="Pruba commit desde kt" />
+    <MESSAGE value="Cambio interfaz" />
+    <option name="LAST_COMMIT_MESSAGE" value="Cambio interfaz" />
   </component>
   <component name="WindowStateProjectService">
     <state x="275" y="65" key="#Project_Structure" timestamp="1588191335875">
       <screen x="0" y="40" width="1366" height="728" />
     </state>
     <state x="275" y="65" key="#Project_Structure/0.40.1366.728@0.40.1366.728" timestamp="1588191335875" />
-    <state x="814" y="114" key="#com.intellij.ide.util.MemberChooser" timestamp="1588426836129">
+    <state x="814" y="114" key="#com.intellij.ide.util.MemberChooser" timestamp="1588452632256">
       <screen x="0" y="40" width="1366" height="728" />
     </state>
-    <state x="814" y="114" key="#com.intellij.ide.util.MemberChooser/0.40.1366.728@0.40.1366.728" timestamp="1588426836129" />
+    <state x="814" y="114" key="#com.intellij.ide.util.MemberChooser/0.40.1366.728@0.40.1366.728" timestamp="1588452632256" />
     <state x="413" y="194" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1588191575092">
       <screen x="0" y="40" width="1366" height="728" />
     </state>
@@ -156,14 +169,14 @@
       <screen x="0" y="40" width="1366" height="728" />
     </state>
     <state x="462" y="59" key="#org.jetbrains.kotlin.idea.refactoring.move.moveDeclarations.ui.MoveKotlinTopLevelDeclarationsDialog/0.40.1366.728@0.40.1366.728" timestamp="1585428391413" />
-    <state x="0" y="40" key="CommitChangelistDialog2" timestamp="1588444344158">
+    <state x="0" y="40" key="CommitChangelistDialog2" timestamp="1588444438736">
       <screen x="0" y="40" width="1366" height="728" />
     </state>
-    <state x="0" y="40" key="CommitChangelistDialog2/0.40.1366.728@0.40.1366.728" timestamp="1588444344158" />
-    <state width="766" height="466" key="DebuggerActiveHint" timestamp="1588432975974">
+    <state x="0" y="40" key="CommitChangelistDialog2/0.40.1366.728@0.40.1366.728" timestamp="1588444438736" />
+    <state width="766" height="466" key="DebuggerActiveHint" timestamp="1588451480084">
       <screen x="0" y="40" width="1366" height="728" />
     </state>
-    <state width="766" height="466" key="DebuggerActiveHint/0.40.1366.728@0.40.1366.728" timestamp="1588432975974" />
+    <state width="766" height="466" key="DebuggerActiveHint/0.40.1366.728@0.40.1366.728" timestamp="1588451480084" />
     <state x="463" y="162" key="FileChooserDialogImpl" timestamp="1587604588795">
       <screen x="0" y="40" width="1366" height="728" />
     </state>
@@ -172,38 +185,38 @@
       <screen x="0" y="40" width="1366" height="728" />
     </state>
     <state x="509" y="305" key="Github.CreateGistDialog/0.40.1366.728@0.40.1366.728" timestamp="1588444269789" />
-    <state width="1323" height="44" key="GridCell.Tab.0.bottom" timestamp="1588442210779">
+    <state width="1323" height="41" key="GridCell.Tab.0.bottom" timestamp="1588455227424">
       <screen x="0" y="40" width="1366" height="728" />
     </state>
-    <state width="1323" height="44" key="GridCell.Tab.0.bottom/0.40.1366.728@0.40.1366.728" timestamp="1588442210779" />
-    <state width="1323" height="44" key="GridCell.Tab.0.center" timestamp="1588442210779">
+    <state width="1323" height="41" key="GridCell.Tab.0.bottom/0.40.1366.728@0.40.1366.728" timestamp="1588455227424" />
+    <state width="1323" height="41" key="GridCell.Tab.0.center" timestamp="1588455227424">
       <screen x="0" y="40" width="1366" height="728" />
     </state>
-    <state width="1323" height="44" key="GridCell.Tab.0.center/0.40.1366.728@0.40.1366.728" timestamp="1588442210779" />
-    <state width="1323" height="44" key="GridCell.Tab.0.left" timestamp="1588442210779">
+    <state width="1323" height="41" key="GridCell.Tab.0.center/0.40.1366.728@0.40.1366.728" timestamp="1588455227424" />
+    <state width="1323" height="41" key="GridCell.Tab.0.left" timestamp="1588455227424">
       <screen x="0" y="40" width="1366" height="728" />
     </state>
-    <state width="1323" height="44" key="GridCell.Tab.0.left/0.40.1366.728@0.40.1366.728" timestamp="1588442210779" />
-    <state width="1323" height="44" key="GridCell.Tab.0.right" timestamp="1588442210779">
+    <state width="1323" height="41" key="GridCell.Tab.0.left/0.40.1366.728@0.40.1366.728" timestamp="1588455227424" />
+    <state width="1323" height="41" key="GridCell.Tab.0.right" timestamp="1588455227424">
       <screen x="0" y="40" width="1366" height="728" />
     </state>
-    <state width="1323" height="44" key="GridCell.Tab.0.right/0.40.1366.728@0.40.1366.728" timestamp="1588442210779" />
-    <state width="1323" height="41" key="GridCell.Tab.1.bottom" timestamp="1588439913869">
+    <state width="1323" height="41" key="GridCell.Tab.0.right/0.40.1366.728@0.40.1366.728" timestamp="1588455227424" />
+    <state width="1323" height="41" key="GridCell.Tab.1.bottom" timestamp="1588455239146">
       <screen x="0" y="40" width="1366" height="728" />
     </state>
-    <state width="1323" height="41" key="GridCell.Tab.1.bottom/0.40.1366.728@0.40.1366.728" timestamp="1588439913869" />
-    <state width="1323" height="41" key="GridCell.Tab.1.center" timestamp="1588439913869">
+    <state width="1323" height="41" key="GridCell.Tab.1.bottom/0.40.1366.728@0.40.1366.728" timestamp="1588455239146" />
+    <state width="1323" height="41" key="GridCell.Tab.1.center" timestamp="1588455239146">
       <screen x="0" y="40" width="1366" height="728" />
     </state>
-    <state width="1323" height="41" key="GridCell.Tab.1.center/0.40.1366.728@0.40.1366.728" timestamp="1588439913869" />
-    <state width="1323" height="41" key="GridCell.Tab.1.left" timestamp="1588439913869">
+    <state width="1323" height="41" key="GridCell.Tab.1.center/0.40.1366.728@0.40.1366.728" timestamp="1588455239146" />
+    <state width="1323" height="41" key="GridCell.Tab.1.left" timestamp="1588455239146">
       <screen x="0" y="40" width="1366" height="728" />
     </state>
-    <state width="1323" height="41" key="GridCell.Tab.1.left/0.40.1366.728@0.40.1366.728" timestamp="1588439913869" />
-    <state width="1323" height="41" key="GridCell.Tab.1.right" timestamp="1588439913869">
+    <state width="1323" height="41" key="GridCell.Tab.1.left/0.40.1366.728@0.40.1366.728" timestamp="1588455239146" />
+    <state width="1323" height="41" key="GridCell.Tab.1.right" timestamp="1588455239146">
       <screen x="0" y="40" width="1366" height="728" />
     </state>
-    <state width="1323" height="41" key="GridCell.Tab.1.right/0.40.1366.728@0.40.1366.728" timestamp="1588439913869" />
+    <state width="1323" height="41" key="GridCell.Tab.1.right/0.40.1366.728@0.40.1366.728" timestamp="1588455239146" />
     <state x="163" y="40" key="SettingsEditor" timestamp="1588191726463">
       <screen x="0" y="40" width="1366" height="728" />
     </state>
@@ -224,6 +237,10 @@
       <screen x="0" y="40" width="1366" height="728" />
     </state>
     <state x="0" y="36" width="586" height="732" key="find.popup/0.40.1366.728@0.40.1366.728" timestamp="1588438387355" />
+    <state x="292" y="207" key="git4idea.merge.GitPullDialog" timestamp="1588444835186">
+      <screen x="0" y="40" width="1366" height="728" />
+    </state>
+    <state x="292" y="207" key="git4idea.merge.GitPullDialog/0.40.1366.728@0.40.1366.728" timestamp="1588444835186" />
     <state x="339" y="182" key="run.anything.popup" timestamp="1587516774303">
       <screen x="0" y="40" width="1366" height="728" />
     </state>
@@ -239,13 +256,23 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="kotlin-line">
           <url>file://$PROJECT_DIR$/src/co/edu/uniquindio/compilador/Analizador_Sintactico/AnalizadorSintactico.kt</url>
-          <line>549</line>
-          <option name="timeStamp" value="83" />
+          <line>577</line>
+          <option name="timeStamp" value="96" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="kotlin-line">
           <url>file://$PROJECT_DIR$/src/co/edu/uniquindio/compilador/Analizador_Sintactico/AnalizadorSintactico.kt</url>
-          <line>521</line>
-          <option name="timeStamp" value="87" />
+          <line>616</line>
+          <option name="timeStamp" value="97" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="kotlin-line">
+          <url>file://$PROJECT_DIR$/src/co/edu/uniquindio/compilador/Analizador_Sintactico/AnalizadorSintactico.kt</url>
+          <line>608</line>
+          <option name="timeStamp" value="98" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="kotlin-line">
+          <url>file://$PROJECT_DIR$/src/co/edu/uniquindio/compilador/Analizador_Sintactico/AnalizadorSintactico.kt</url>
+          <line>912</line>
+          <option name="timeStamp" value="101" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

@@ -375,13 +375,25 @@ class AnalizadorSintactico(var listaTokens:ArrayList<Token>) {
      */
     fun esExpresion():Expresion?{
         var expresion:Expresion?=esExpresionAritmetica()
-
         if (expresion!= null) return expresion
 
         expresion=esExpresionRelacional()
-
         if (expresion!= null) return expresion
 
+        expresion=esExpresionCadena()
+        if (expresion!= null) return expresion
+
+        return null
+    }
+
+    fun esExpresionCadena():Expresion?{
+        while (tokenActual.categoria == Categoria.FIN_SENTENCIA) obtenerSiguienteToken()
+
+            if (tokenActual.categoria== Categoria.CADENA ){
+                var cadena=tokenActual
+                obtenerSiguienteToken()
+                return ExpresionCadena(cadena)
+            }
         return null
     }
 
@@ -478,7 +490,8 @@ class AnalizadorSintactico(var listaTokens:ArrayList<Token>) {
         var tSigno= Token(signo,Categoria.SIGNO,tokenActual.fila,tokenActual.columna)
 
 
-        if (tokenActual.categoria == Categoria.ENTREO || tokenActual.categoria == Categoria.DECIMAL || tokenActual.categoria == Categoria.IDENTIFICADOR){
+        if (tokenActual.categoria == Categoria.ENTREO || tokenActual.categoria == Categoria.DECIMAL ||
+            (tokenActual.categoria == Categoria.IDENTIFICADOR && listaTokens[posicionActual+1].categoria != Categoria.PARENTESIS_IZQUIERDO)){
             return ValorNumerico(tSigno,tokenActual)
         }
         return null
@@ -531,10 +544,21 @@ class AnalizadorSintactico(var listaTokens:ArrayList<Token>) {
         sentencia=esTRyCatch()
         if (sentencia != null) return sentencia
 
+        sentencia=esInterrupcion()
+        if (sentencia != null) return sentencia
+
 
         return null
     }
 
+    fun esInterrupcion():Sentencia?{
+        if (tokenActual.categoria == Categoria.PALABRA_RESERVADA && tokenActual.lexema.toLowerCase()=="break"){
+           var interrupcion=tokenActual
+            obtenerSiguienteToken()
+            return Interrupcion(interrupcion)
+        }
+        return null
+    }
     /***
      * <TryCatch>::= “try” “{“ [<ListaSentencias> ]  “}”  <catch> [<finally>]
         <catch>::= “catch””(“ <Parametro> “)”  “{“ [<ListaSentencias> ] “}” [<catch>]
@@ -602,9 +626,14 @@ class AnalizadorSintactico(var listaTokens:ArrayList<Token>) {
                                                         reportarError("Falta la llave de apertura del Finally","TryCatch")
                                                     }
                                                 }else{
+                                                     do{
+                                                        posicionActual--
+                                                        tokenActual=listaTokens[posicionActual]
+                                                    }while (tokenActual.categoria == Categoria.FIN_SENTENCIA)
                                                     return TryCatch(sentencias,tipoExcepcion,nombreExcepcion,sentenciasCatch,null)
                                                 }
                                             }else{
+
                                                 reportarError("Falta la llave de cierre del Catch","TryCatch")
                                             }
                                         }else{
@@ -720,9 +749,14 @@ class AnalizadorSintactico(var listaTokens:ArrayList<Token>) {
                         var opAsignacion = tokenActual
                         obtenerSiguienteToken()
                         var expresion = esExpresion()
-
-                        if (expresion != null) {
-                            var asignacion = Asignacion(nombre, opAsignacion, expresion)
+                        var invocacion = esInvocacionFuncion()
+                        var asignacion:Asignacion
+                        if (expresion != null || invocacion != null) {
+                            if (expresion!= null) {
+                                asignacion = Asignacion(nombre, opAsignacion, expresion)
+                            }else{
+                                 asignacion = Asignacion(nombre, opAsignacion, invocacion!!)
+                            }
                             return Declaracion(modAcceso, tipoDato, nombre, asignacion)
                         } else {
                             reportarError("Falta la expresion de asignacion de la declaracion", "Declaracion")
@@ -779,9 +813,9 @@ class AnalizadorSintactico(var listaTokens:ArrayList<Token>) {
                                             var listaSentencias = esListaSentencias()
                                             while (tokenActual.categoria == Categoria.FIN_SENTENCIA) obtenerSiguienteToken()
 
-
                                             if (tokenActual.categoria == Categoria.LLAVE_DERECHA) {
-                                                return CicloForeach(lista, item, tipoDato,listaSentencias,null)
+                                                return CicloForeach( lista,item, tipoDato,  listaSentencias )
+
                                             } else {
                                                 reportarError("Falta llave derecha en el Foreach", "Ciclo Foreach")
                                             }
@@ -835,11 +869,12 @@ class AnalizadorSintactico(var listaTokens:ArrayList<Token>) {
                             obtenerSiguienteToken()
 
                             var sentencias=esListaSentencias()
+
                             while (tokenActual.categoria == Categoria.FIN_SENTENCIA) obtenerSiguienteToken()
-                            var interrupcion=null
+
                             if (tokenActual.categoria == Categoria.LLAVE_DERECHA){
                                 obtenerSiguienteToken()
-                                return CicloWhile(expRelacional,sentencias,interrupcion)
+                                return CicloWhile(expRelacional,sentencias)
 
                             }else{
                                 reportarError("Falta la llave derecha del ciclo while","Ciclo While")
@@ -877,13 +912,18 @@ class AnalizadorSintactico(var listaTokens:ArrayList<Token>) {
                 var opAsignacion= tokenActual
                 obtenerSiguienteToken()
                 var expresion=esExpresion()
+                var invocacion:Sentencia?=esInvocacionFuncion()
 
-                if (expresion != null){
+                if (expresion != null || invocacion!=null){
 
                     //obtenerSiguienteToken()
                     if (tokenActual.categoria == Categoria.FIN_SENTENCIA ){
                         //obtenerSiguienteToken()
-                        return Asignacion(nombre,opAsignacion, expresion)
+                        if (expresion != null) {
+                            return Asignacion(nombre, opAsignacion, expresion)
+                        }else{
+                            return Asignacion(nombre, opAsignacion, invocacion!!)
+                        }
                     }else{
                         reportarError("Falta el fin de sentencia de la asignacion","Asignacion")
                     }
