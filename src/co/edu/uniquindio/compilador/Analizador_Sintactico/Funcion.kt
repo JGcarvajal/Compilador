@@ -7,7 +7,7 @@ import javafx.scene.control.TreeItem
  * Esta es la clase que nos permite representar uan funcion dentro del lenguaje propuesto
  */
 class Funcion (var nombreFuncion:Token, var tipoRetorno: Token, var listaParametros: ArrayList<Parametro>,
-               var listaSentencias: ArrayList<Sentencia>, var retorno:Expresion?) {
+               var listaSentencias: ArrayList<Sentencia>?, var retorno:Expresion?) {
     override fun toString(): String {
         return "Funcion(nombreFuncion=$nombreFuncion, tipoRetorno=$tipoRetorno, listaParametros=$listaParametros," +
                 " listaSentencias=$listaSentencias, Retorno=$retorno), \n"
@@ -26,7 +26,7 @@ class Funcion (var nombreFuncion:Token, var tipoRetorno: Token, var listaParamet
         raiz.children.add(raizParametros)
 
         var raizSentencias= TreeItem("Sentencias")
-        for(s in listaSentencias){
+        for(s in listaSentencias!!){
             raizSentencias.children.add(s.getArbolVisual())
         }
         raiz.children.add(raizSentencias)

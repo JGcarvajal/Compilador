@@ -2,7 +2,7 @@ package co.edu.uniquindio.compilador.Analizador_Sintactico
 
 import javafx.scene.control.TreeItem
 
-class Decision(var expresionLogina:ExpresionLogica, var listaSentecias: ArrayList<Sentencia>,var listaSenteciasElse: ArrayList<Sentencia>?):Sentencia() {
+class Decision(var expresionLogina:ExpresionLogica, var listaSentecias: ArrayList<Sentencia>?,var listaSenteciasElse: ArrayList<Sentencia>?):Sentencia() {
     override fun toString(): String {
         return "Decision(expresionLogina=$expresionLogina, listaSentecias=$listaSentecias, listaSenteciasElse=$listaSenteciasElse)"
     }
@@ -17,7 +17,7 @@ class Decision(var expresionLogina:ExpresionLogica, var listaSentecias: ArrayLis
 
         var raizTrue= TreeItem<String>("Sentencias Verdaderas")
 
-        for (s in listaSentecias){
+        for (s in listaSentecias!!){
             raizTrue.children.add(s.getArbolVisual())
         }
         raiz.children.add(raizTrue)

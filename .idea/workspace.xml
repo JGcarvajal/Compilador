@@ -2,7 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e3fe0db8-6343-48c3-aec1-87df656f4d2e" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/Inicio.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/resources/Inicio.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/co/edu/uniquindio/compilador/Analizador_Sintactico/AnalizadorSintactico.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/co/edu/uniquindio/compilador/Analizador_Sintactico/AnalizadorSintactico.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/co/edu/uniquindio/compilador/Analizador_Sintactico/CicloForeach.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/co/edu/uniquindio/compilador/Analizador_Sintactico/CicloForeach.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/co/edu/uniquindio/compilador/Analizador_Sintactico/CicloWhile.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/co/edu/uniquindio/compilador/Analizador_Sintactico/CicloWhile.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/co/edu/uniquindio/compilador/Analizador_Sintactico/Decision.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/co/edu/uniquindio/compilador/Analizador_Sintactico/Decision.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/co/edu/uniquindio/compilador/Analizador_Sintactico/Funcion.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/co/edu/uniquindio/compilador/Analizador_Sintactico/Funcion.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -108,7 +114,7 @@
       <workItem from="1588107627726" duration="28493000" />
       <workItem from="1588174714096" duration="6250000" />
       <workItem from="1588261359383" duration="1301000" />
-      <workItem from="1588360978107" duration="22983000" />
+      <workItem from="1588360978107" duration="24096000" />
     </task>
     <servers />
   </component>
@@ -152,22 +158,22 @@
       <screen x="0" y="40" width="1366" height="728" />
     </state>
     <state x="509" y="305" key="Github.CreateGistDialog/0.40.1366.728@0.40.1366.728" timestamp="1585519351626" />
-    <state width="1323" height="44" key="GridCell.Tab.0.bottom" timestamp="1588439915130">
+    <state width="1323" height="44" key="GridCell.Tab.0.bottom" timestamp="1588442210779">
       <screen x="0" y="40" width="1366" height="728" />
     </state>
-    <state width="1323" height="44" key="GridCell.Tab.0.bottom/0.40.1366.728@0.40.1366.728" timestamp="1588439915130" />
-    <state width="1323" height="44" key="GridCell.Tab.0.center" timestamp="1588439915130">
+    <state width="1323" height="44" key="GridCell.Tab.0.bottom/0.40.1366.728@0.40.1366.728" timestamp="1588442210779" />
+    <state width="1323" height="44" key="GridCell.Tab.0.center" timestamp="1588442210779">
       <screen x="0" y="40" width="1366" height="728" />
     </state>
-    <state width="1323" height="44" key="GridCell.Tab.0.center/0.40.1366.728@0.40.1366.728" timestamp="1588439915130" />
-    <state width="1323" height="44" key="GridCell.Tab.0.left" timestamp="1588439915129">
+    <state width="1323" height="44" key="GridCell.Tab.0.center/0.40.1366.728@0.40.1366.728" timestamp="1588442210779" />
+    <state width="1323" height="44" key="GridCell.Tab.0.left" timestamp="1588442210779">
       <screen x="0" y="40" width="1366" height="728" />
     </state>
-    <state width="1323" height="44" key="GridCell.Tab.0.left/0.40.1366.728@0.40.1366.728" timestamp="1588439915129" />
-    <state width="1323" height="44" key="GridCell.Tab.0.right" timestamp="1588439915130">
+    <state width="1323" height="44" key="GridCell.Tab.0.left/0.40.1366.728@0.40.1366.728" timestamp="1588442210779" />
+    <state width="1323" height="44" key="GridCell.Tab.0.right" timestamp="1588442210779">
       <screen x="0" y="40" width="1366" height="728" />
     </state>
-    <state width="1323" height="44" key="GridCell.Tab.0.right/0.40.1366.728@0.40.1366.728" timestamp="1588439915130" />
+    <state width="1323" height="44" key="GridCell.Tab.0.right/0.40.1366.728@0.40.1366.728" timestamp="1588442210779" />
     <state width="1323" height="41" key="GridCell.Tab.1.bottom" timestamp="1588439913869">
       <screen x="0" y="40" width="1366" height="728" />
     </state>

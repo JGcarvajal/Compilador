@@ -489,7 +489,7 @@ class AnalizadorSintactico(var listaTokens:ArrayList<Token>) {
      * * BNF para reresentar una sentencia
      * <ListaSentencias>::=  <Sentecia> [<ListaSentencias> ]
      */
-    fun esListaSentencias():ArrayList<Sentencia>{
+    fun esListaSentencias():ArrayList<Sentencia>?{
         var sentecia=esSentencia()
         var listaSentencias =ArrayList<Sentencia>()
 
@@ -782,7 +782,7 @@ class AnalizadorSintactico(var listaTokens:ArrayList<Token>) {
 
 
                                             if (tokenActual.categoria == Categoria.LLAVE_DERECHA) {
-                                                return CicloForeach(lista, item, tipoDato,listaSentencias)
+                                                return CicloForeach(lista, item, tipoDato,listaSentencias,null)
                                             } else {
                                                 reportarError("Falta llave derecha en el Foreach", "Ciclo Foreach")
                                             }
@@ -837,10 +837,10 @@ class AnalizadorSintactico(var listaTokens:ArrayList<Token>) {
 
                             var sentencias=esListaSentencias()
                             while (tokenActual.categoria == Categoria.FIN_SENTENCIA) obtenerSiguienteToken()
-
+                            var interrupcion=null
                             if (tokenActual.categoria == Categoria.LLAVE_DERECHA){
                                 obtenerSiguienteToken()
-                                return CicloWhile(expRelacional,sentencias)
+                                return CicloWhile(expRelacional,sentencias,interrupcion)
 
                             }else{
                                 reportarError("Falta la llave derecha del ciclo while","Ciclo While")
