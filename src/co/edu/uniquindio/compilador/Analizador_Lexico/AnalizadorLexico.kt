@@ -192,7 +192,7 @@ class AnalizadorLexico (var codigoFuente:String) {
         palabrasRes.add("by")
         palabrasRes.add("his")
         palabrasRes.add("and")
-        palabrasRes.add("notReturn")
+        palabrasRes.add("notreturn")
         palabrasRes.add("not")
         palabrasRes.add("enter")
         palabrasRes.add("delete")
@@ -200,7 +200,7 @@ class AnalizadorLexico (var codigoFuente:String) {
         palabrasRes.add("data")
         palabrasRes.add("update")
         palabrasRes.add("in")
-        palabrasRes.add("ad")
+        palabrasRes.add("add")
         palabrasRes.add("subtract")
         palabrasRes.add("falling")
         palabrasRes.add("upward")
@@ -208,7 +208,6 @@ class AnalizadorLexico (var codigoFuente:String) {
         palabrasRes.add("class")
         palabrasRes.add("list")
         palabrasRes.add("string")
-        palabrasRes.add("integer")
         palabrasRes.add("decimal")
         palabrasRes.add("float")
         palabrasRes.add("function")
@@ -227,6 +226,7 @@ class AnalizadorLexico (var codigoFuente:String) {
         palabrasRes.add("exception")
         palabrasRes.add("break")
         palabrasRes.add("finally")
+        palabrasRes.add("bool")
 
 
         if(caracterActual.isLetter()){

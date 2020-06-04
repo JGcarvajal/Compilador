@@ -15,4 +15,10 @@ class Parametro (var tipoDato:Token, var nombre:Token) {
 
         return TreeItem("${nombre.lexema} : ${tipoDato.lexema}")
     }
+
+    fun getJavaCode():String{
+        var codigo =""+tipoDato.getJavaCode()+" "+nombre.getJavaCode()
+
+        return codigo
+    }
 }

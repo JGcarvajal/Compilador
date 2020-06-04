@@ -1,14 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e3fe0db8-6343-48c3-aec1-87df656f4d2e" name="Default Changelist" comment="">
+    <list default="true" id="e3fe0db8-6343-48c3-aec1-87df656f4d2e" name="Default Changelist" comment="Cambio interfaz">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CompiladorKotlin/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CompiladorKotlin/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CompiladorKotlin/Inicio.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CompiladorKotlin/Inicio.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CompiladorKotlin/co/edu/uniquindio/compilador/Analizador_Lexico/AnalizadorLexico.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CompiladorKotlin/co/edu/uniquindio/compilador/Analizador_Lexico/AnalizadorLexico.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CompiladorKotlin/co/edu/uniquindio/compilador/Analizador_Lexico/Categoria.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CompiladorKotlin/co/edu/uniquindio/compilador/Analizador_Lexico/Categoria.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CompiladorKotlin/co/edu/uniquindio/compilador/Analizador_Lexico/Token.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CompiladorKotlin/co/edu/uniquindio/compilador/Analizador_Lexico/Token.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/CompiladorKotlin/co/edu/uniquindio/compilador/Analizador_Sintactico/AnalizadorSintactico.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CompiladorKotlin/co/edu/uniquindio/compilador/Analizador_Sintactico/AnalizadorSintactico.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CompiladorKotlin/co/edu/uniquindio/compilador/Analizador_Sintactico/Asignacion.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CompiladorKotlin/co/edu/uniquindio/compilador/Analizador_Sintactico/Asignacion.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CompiladorKotlin/co/edu/uniquindio/compilador/Analizador_Sintactico/CicloForeach.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CompiladorKotlin/co/edu/uniquindio/compilador/Analizador_Sintactico/CicloForeach.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CompiladorKotlin/co/edu/uniquindio/compilador/Analizador_Sintactico/CicloWhile.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CompiladorKotlin/co/edu/uniquindio/compilador/Analizador_Sintactico/CicloWhile.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CompiladorKotlin/co/edu/uniquindio/compilador/Analizador_Sintactico/Decision.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CompiladorKotlin/co/edu/uniquindio/compilador/Analizador_Sintactico/Decision.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CompiladorKotlin/co/edu/uniquindio/compilador/Analizador_Sintactico/Declaracion.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CompiladorKotlin/co/edu/uniquindio/compilador/Analizador_Sintactico/Declaracion.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CompiladorKotlin/co/edu/uniquindio/compilador/Analizador_Sintactico/Decremento.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CompiladorKotlin/co/edu/uniquindio/compilador/Analizador_Sintactico/Decremento.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CompiladorKotlin/co/edu/uniquindio/compilador/Analizador_Sintactico/Expresion.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CompiladorKotlin/co/edu/uniquindio/compilador/Analizador_Sintactico/Expresion.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CompiladorKotlin/co/edu/uniquindio/compilador/Analizador_Sintactico/ExpresionAritmetica.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CompiladorKotlin/co/edu/uniquindio/compilador/Analizador_Sintactico/ExpresionAritmetica.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CompiladorKotlin/co/edu/uniquindio/compilador/Analizador_Sintactico/ExpresionCadena.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CompiladorKotlin/co/edu/uniquindio/compilador/Analizador_Sintactico/ExpresionCadena.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CompiladorKotlin/co/edu/uniquindio/compilador/Analizador_Sintactico/ExpresionLogica.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CompiladorKotlin/co/edu/uniquindio/compilador/Analizador_Sintactico/ExpresionLogica.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CompiladorKotlin/co/edu/uniquindio/compilador/Analizador_Sintactico/ExpresionRelacional.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CompiladorKotlin/co/edu/uniquindio/compilador/Analizador_Sintactico/ExpresionRelacional.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CompiladorKotlin/co/edu/uniquindio/compilador/Analizador_Sintactico/Funcion.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CompiladorKotlin/co/edu/uniquindio/compilador/Analizador_Sintactico/Funcion.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CompiladorKotlin/co/edu/uniquindio/compilador/Analizador_Sintactico/Incremento.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CompiladorKotlin/co/edu/uniquindio/compilador/Analizador_Sintactico/Incremento.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CompiladorKotlin/co/edu/uniquindio/compilador/Analizador_Sintactico/Invocacion.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CompiladorKotlin/co/edu/uniquindio/compilador/Analizador_Sintactico/Invocacion.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CompiladorKotlin/co/edu/uniquindio/compilador/Analizador_Sintactico/Parametro.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CompiladorKotlin/co/edu/uniquindio/compilador/Analizador_Sintactico/Parametro.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CompiladorKotlin/co/edu/uniquindio/compilador/Analizador_Sintactico/Sentencia.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CompiladorKotlin/co/edu/uniquindio/compilador/Analizador_Sintactico/Sentencia.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CompiladorKotlin/co/edu/uniquindio/compilador/Analizador_Sintactico/UnidadCompilacion.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CompiladorKotlin/co/edu/uniquindio/compilador/Analizador_Sintactico/UnidadCompilacion.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CompiladorKotlin/co/edu/uniquindio/compilador/Analizador_Sintactico/ValorNumerico.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CompiladorKotlin/co/edu/uniquindio/compilador/Analizador_Sintactico/ValorNumerico.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CompiladorKotlin/co/edu/uniquindio/compilador/Controladores/InicioController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CompiladorKotlin/co/edu/uniquindio/compilador/Controladores/InicioController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CompiladorKotlin/resources/Inicio.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CompiladorKotlin/resources/Inicio.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/Inicio.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/resources/Inicio.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/co/edu/uniquindio/compilador/Analizador_Lexico/AnalizadorLexico.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/co/edu/uniquindio/compilador/Analizador_Lexico/AnalizadorLexico.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/co/edu/uniquindio/compilador/Analizador_Lexico/Categoria.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/co/edu/uniquindio/compilador/Analizador_Lexico/Categoria.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/co/edu/uniquindio/compilador/Analizador_Lexico/Token.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/co/edu/uniquindio/compilador/Analizador_Lexico/Token.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/co/edu/uniquindio/compilador/Analizador_Sintactico/AnalizadorSintactico.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/co/edu/uniquindio/compilador/Analizador_Sintactico/AnalizadorSintactico.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/co/edu/uniquindio/compilador/Analizador_Sintactico/Asignacion.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/co/edu/uniquindio/compilador/Analizador_Sintactico/Asignacion.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/co/edu/uniquindio/compilador/Analizador_Sintactico/CicloForeach.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/co/edu/uniquindio/compilador/Analizador_Sintactico/CicloForeach.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/co/edu/uniquindio/compilador/Analizador_Sintactico/CicloWhile.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/co/edu/uniquindio/compilador/Analizador_Sintactico/CicloWhile.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/co/edu/uniquindio/compilador/Analizador_Sintactico/Decision.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/co/edu/uniquindio/compilador/Analizador_Sintactico/Decision.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/co/edu/uniquindio/compilador/Analizador_Sintactico/Declaracion.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/co/edu/uniquindio/compilador/Analizador_Sintactico/Declaracion.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/co/edu/uniquindio/compilador/Analizador_Sintactico/Decremento.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/co/edu/uniquindio/compilador/Analizador_Sintactico/Decremento.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/co/edu/uniquindio/compilador/Analizador_Sintactico/Expresion.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/co/edu/uniquindio/compilador/Analizador_Sintactico/Expresion.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/co/edu/uniquindio/compilador/Analizador_Sintactico/ExpresionAritmetica.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/co/edu/uniquindio/compilador/Analizador_Sintactico/ExpresionAritmetica.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/co/edu/uniquindio/compilador/Analizador_Sintactico/ExpresionCadena.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/co/edu/uniquindio/compilador/Analizador_Sintactico/ExpresionCadena.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/co/edu/uniquindio/compilador/Analizador_Sintactico/ExpresionLogica.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/co/edu/uniquindio/compilador/Analizador_Sintactico/ExpresionLogica.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/co/edu/uniquindio/compilador/Analizador_Sintactico/ExpresionRelacional.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/co/edu/uniquindio/compilador/Analizador_Sintactico/ExpresionRelacional.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/co/edu/uniquindio/compilador/Analizador_Sintactico/Funcion.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/co/edu/uniquindio/compilador/Analizador_Sintactico/Funcion.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/co/edu/uniquindio/compilador/Analizador_Sintactico/Incremento.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/co/edu/uniquindio/compilador/Analizador_Sintactico/Incremento.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/co/edu/uniquindio/compilador/Analizador_Sintactico/Invocacion.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/co/edu/uniquindio/compilador/Analizador_Sintactico/Invocacion.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/co/edu/uniquindio/compilador/Analizador_Sintactico/Parametro.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/co/edu/uniquindio/compilador/Analizador_Sintactico/Parametro.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/co/edu/uniquindio/compilador/Analizador_Sintactico/Sentencia.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/co/edu/uniquindio/compilador/Analizador_Sintactico/Sentencia.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/co/edu/uniquindio/compilador/Analizador_Sintactico/TryCatch.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/co/edu/uniquindio/compilador/Analizador_Sintactico/TryCatch.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/co/edu/uniquindio/compilador/Analizador_Sintactico/UnidadCompilacion.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/co/edu/uniquindio/compilador/Analizador_Sintactico/UnidadCompilacion.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/co/edu/uniquindio/compilador/Analizador_Sintactico/ValorNumerico.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/co/edu/uniquindio/compilador/Analizador_Sintactico/ValorNumerico.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/co/edu/uniquindio/compilador/Controladores/InicioController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/co/edu/uniquindio/compilador/Controladores/InicioController.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,6 +66,7 @@
         <option value="Kotlin Enum" />
         <option value="Kotlin File" />
         <option value="FxmlFile" />
+        <option value="Class" />
         <option value="Kotlin Class" />
       </list>
     </option>
@@ -121,7 +167,15 @@
       <workItem from="1588107627726" duration="28493000" />
       <workItem from="1588174714096" duration="6250000" />
       <workItem from="1588261359383" duration="1301000" />
-      <workItem from="1588360978107" duration="36148000" />
+      <workItem from="1588360978107" duration="36781000" />
+      <workItem from="1588981593060" duration="3942000" />
+      <workItem from="1589418053671" duration="6506000" />
+      <workItem from="1589586377698" duration="10757000" />
+      <workItem from="1590019242485" duration="3517000" />
+      <workItem from="1590186756355" duration="31513000" />
+      <workItem from="1590794080592" duration="2266000" />
+      <workItem from="1590866871517" duration="11531000" />
+      <workItem from="1591138887442" duration="14932000" />
     </task>
     <task id="LOCAL-00001" summary="Pruba commit desde kt">
       <created>1588444345916</created>
@@ -149,14 +203,18 @@
     <option name="LAST_COMMIT_MESSAGE" value="Cambio interfaz" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="275" y="65" key="#Notifications" timestamp="1589588836067">
+      <screen x="0" y="40" width="1366" height="728" />
+    </state>
+    <state x="275" y="65" key="#Notifications/0.40.1366.728@0.40.1366.728" timestamp="1589588836067" />
     <state x="275" y="65" key="#Project_Structure" timestamp="1588191335875">
       <screen x="0" y="40" width="1366" height="728" />
     </state>
     <state x="275" y="65" key="#Project_Structure/0.40.1366.728@0.40.1366.728" timestamp="1588191335875" />
-    <state x="814" y="114" key="#com.intellij.ide.util.MemberChooser" timestamp="1588452632256">
+    <state x="814" y="114" key="#com.intellij.ide.util.MemberChooser" timestamp="1591149922895">
       <screen x="0" y="40" width="1366" height="728" />
     </state>
-    <state x="814" y="114" key="#com.intellij.ide.util.MemberChooser/0.40.1366.728@0.40.1366.728" timestamp="1588452632256" />
+    <state x="814" y="114" key="#com.intellij.ide.util.MemberChooser/0.40.1366.728@0.40.1366.728" timestamp="1591149922895" />
     <state x="413" y="194" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1588191575092">
       <screen x="0" y="40" width="1366" height="728" />
     </state>
@@ -169,14 +227,14 @@
       <screen x="0" y="40" width="1366" height="728" />
     </state>
     <state x="462" y="59" key="#org.jetbrains.kotlin.idea.refactoring.move.moveDeclarations.ui.MoveKotlinTopLevelDeclarationsDialog/0.40.1366.728@0.40.1366.728" timestamp="1585428391413" />
-    <state x="0" y="40" key="CommitChangelistDialog2" timestamp="1588444438736">
+    <state x="0" y="40" key="CommitChangelistDialog2" timestamp="1590884202880">
       <screen x="0" y="40" width="1366" height="728" />
     </state>
-    <state x="0" y="40" key="CommitChangelistDialog2/0.40.1366.728@0.40.1366.728" timestamp="1588444438736" />
-    <state width="766" height="466" key="DebuggerActiveHint" timestamp="1588451480084">
+    <state x="0" y="40" key="CommitChangelistDialog2/0.40.1366.728@0.40.1366.728" timestamp="1590884202880" />
+    <state width="766" height="466" key="DebuggerActiveHint" timestamp="1590430301551">
       <screen x="0" y="40" width="1366" height="728" />
     </state>
-    <state width="766" height="466" key="DebuggerActiveHint/0.40.1366.728@0.40.1366.728" timestamp="1588451480084" />
+    <state width="766" height="466" key="DebuggerActiveHint/0.40.1366.728@0.40.1366.728" timestamp="1590430301551" />
     <state x="463" y="162" key="FileChooserDialogImpl" timestamp="1587604588795">
       <screen x="0" y="40" width="1366" height="728" />
     </state>
@@ -185,38 +243,38 @@
       <screen x="0" y="40" width="1366" height="728" />
     </state>
     <state x="509" y="305" key="Github.CreateGistDialog/0.40.1366.728@0.40.1366.728" timestamp="1588444269789" />
-    <state width="1323" height="41" key="GridCell.Tab.0.bottom" timestamp="1588455227424">
+    <state width="1323" height="200" key="GridCell.Tab.0.bottom" timestamp="1591229849066">
       <screen x="0" y="40" width="1366" height="728" />
     </state>
-    <state width="1323" height="41" key="GridCell.Tab.0.bottom/0.40.1366.728@0.40.1366.728" timestamp="1588455227424" />
-    <state width="1323" height="41" key="GridCell.Tab.0.center" timestamp="1588455227424">
+    <state width="1323" height="200" key="GridCell.Tab.0.bottom/0.40.1366.728@0.40.1366.728" timestamp="1591229849066" />
+    <state width="1323" height="200" key="GridCell.Tab.0.center" timestamp="1591229849066">
       <screen x="0" y="40" width="1366" height="728" />
     </state>
-    <state width="1323" height="41" key="GridCell.Tab.0.center/0.40.1366.728@0.40.1366.728" timestamp="1588455227424" />
-    <state width="1323" height="41" key="GridCell.Tab.0.left" timestamp="1588455227424">
+    <state width="1323" height="200" key="GridCell.Tab.0.center/0.40.1366.728@0.40.1366.728" timestamp="1591229849066" />
+    <state width="1323" height="200" key="GridCell.Tab.0.left" timestamp="1591229849066">
       <screen x="0" y="40" width="1366" height="728" />
     </state>
-    <state width="1323" height="41" key="GridCell.Tab.0.left/0.40.1366.728@0.40.1366.728" timestamp="1588455227424" />
-    <state width="1323" height="41" key="GridCell.Tab.0.right" timestamp="1588455227424">
+    <state width="1323" height="200" key="GridCell.Tab.0.left/0.40.1366.728@0.40.1366.728" timestamp="1591229849066" />
+    <state width="1323" height="200" key="GridCell.Tab.0.right" timestamp="1591229849066">
       <screen x="0" y="40" width="1366" height="728" />
     </state>
-    <state width="1323" height="41" key="GridCell.Tab.0.right/0.40.1366.728@0.40.1366.728" timestamp="1588455227424" />
-    <state width="1323" height="41" key="GridCell.Tab.1.bottom" timestamp="1588455239146">
+    <state width="1323" height="200" key="GridCell.Tab.0.right/0.40.1366.728@0.40.1366.728" timestamp="1591229849066" />
+    <state width="1323" height="200" key="GridCell.Tab.1.bottom" timestamp="1591229849067">
       <screen x="0" y="40" width="1366" height="728" />
     </state>
-    <state width="1323" height="41" key="GridCell.Tab.1.bottom/0.40.1366.728@0.40.1366.728" timestamp="1588455239146" />
-    <state width="1323" height="41" key="GridCell.Tab.1.center" timestamp="1588455239146">
+    <state width="1323" height="200" key="GridCell.Tab.1.bottom/0.40.1366.728@0.40.1366.728" timestamp="1591229849067" />
+    <state width="1323" height="200" key="GridCell.Tab.1.center" timestamp="1591229849067">
       <screen x="0" y="40" width="1366" height="728" />
     </state>
-    <state width="1323" height="41" key="GridCell.Tab.1.center/0.40.1366.728@0.40.1366.728" timestamp="1588455239146" />
-    <state width="1323" height="41" key="GridCell.Tab.1.left" timestamp="1588455239146">
+    <state width="1323" height="200" key="GridCell.Tab.1.center/0.40.1366.728@0.40.1366.728" timestamp="1591229849067" />
+    <state width="1323" height="200" key="GridCell.Tab.1.left" timestamp="1591229849067">
       <screen x="0" y="40" width="1366" height="728" />
     </state>
-    <state width="1323" height="41" key="GridCell.Tab.1.left/0.40.1366.728@0.40.1366.728" timestamp="1588455239146" />
-    <state width="1323" height="41" key="GridCell.Tab.1.right" timestamp="1588455239146">
+    <state width="1323" height="200" key="GridCell.Tab.1.left/0.40.1366.728@0.40.1366.728" timestamp="1591229849067" />
+    <state width="1323" height="200" key="GridCell.Tab.1.right" timestamp="1591229849067">
       <screen x="0" y="40" width="1366" height="728" />
     </state>
-    <state width="1323" height="41" key="GridCell.Tab.1.right/0.40.1366.728@0.40.1366.728" timestamp="1588455239146" />
+    <state width="1323" height="200" key="GridCell.Tab.1.right/0.40.1366.728@0.40.1366.728" timestamp="1591229849067" />
     <state x="163" y="40" key="SettingsEditor" timestamp="1588191726463">
       <screen x="0" y="40" width="1366" height="728" />
     </state>
@@ -245,34 +303,53 @@
       <screen x="0" y="40" width="1366" height="728" />
     </state>
     <state x="339" y="182" key="run.anything.popup/0.40.1366.728@0.40.1366.728" timestamp="1587516774303" />
+    <state x="346" y="89" width="672" height="678" key="search.everywhere.popup" timestamp="1591149367770">
+      <screen x="0" y="40" width="1366" height="728" />
+    </state>
+    <state x="346" y="89" width="672" height="678" key="search.everywhere.popup/0.40.1366.728@0.40.1366.728" timestamp="1591149367770" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="kotlin-line">
           <url>file://$PROJECT_DIR$/src/co/edu/uniquindio/compilador/Analizador_Sintactico/AnalizadorSintactico.kt</url>
-          <line>130</line>
-          <option name="timeStamp" value="82" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="kotlin-line">
-          <url>file://$PROJECT_DIR$/src/co/edu/uniquindio/compilador/Analizador_Sintactico/AnalizadorSintactico.kt</url>
-          <line>577</line>
+          <line>610</line>
           <option name="timeStamp" value="96" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="kotlin-line">
           <url>file://$PROJECT_DIR$/src/co/edu/uniquindio/compilador/Analizador_Sintactico/AnalizadorSintactico.kt</url>
-          <line>616</line>
+          <line>649</line>
           <option name="timeStamp" value="97" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="kotlin-line">
           <url>file://$PROJECT_DIR$/src/co/edu/uniquindio/compilador/Analizador_Sintactico/AnalizadorSintactico.kt</url>
-          <line>608</line>
+          <line>641</line>
           <option name="timeStamp" value="98" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="kotlin-line">
           <url>file://$PROJECT_DIR$/src/co/edu/uniquindio/compilador/Analizador_Sintactico/AnalizadorSintactico.kt</url>
-          <line>912</line>
-          <option name="timeStamp" value="101" />
+          <line>812</line>
+          <option name="timeStamp" value="109" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="kotlin-line">
+          <url>file://$PROJECT_DIR$/src/co/edu/uniquindio/compilador/Analizador_Sintactico/AnalizadorSintactico.kt</url>
+          <line>1011</line>
+          <option name="timeStamp" value="111" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="kotlin-line">
+          <url>file://$PROJECT_DIR$/src/co/edu/uniquindio/compilador/Analizador_Sintactico/Decision.kt</url>
+          <line>73</line>
+          <option name="timeStamp" value="128" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="kotlin-line">
+          <url>file://$PROJECT_DIR$/src/co/edu/uniquindio/compilador/Analizador_Sintactico/ExpresionLogica.kt</url>
+          <line>47</line>
+          <option name="timeStamp" value="131" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="kotlin-line">
+          <url>file://$PROJECT_DIR$/src/co/edu/uniquindio/compilador/Semantica/TablaSimbolos.kt</url>
+          <line>58</line>
+          <option name="timeStamp" value="133" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

@@ -3,7 +3,9 @@ package co.edu.uniquindio.compilador.Controladores
 import co.edu.uniquindio.compilador.Analizador_Lexico.AnalizadorLexico
 import co.edu.uniquindio.compilador.Analizador_Lexico.Token
 import co.edu.uniquindio.compilador.Analizador_Sintactico.AnalizadorSintactico
+import co.edu.uniquindio.compilador.Analizador_Sintactico.UnidadCompilacion
 import co.edu.uniquindio.compilador.Miscelaneos.Error
+import co.edu.uniquindio.compilador.Semantica.AnalizadorSemantico
 import javafx.collections.FXCollections
 import javafx.event.ActionEvent
 import javafx.fxml.FXML
@@ -43,9 +45,11 @@ class InicioController : Initializable{
     @FXML lateinit var clFilaEL:TableColumn<Error,Int>
     @FXML lateinit var clColumnaEL:TableColumn<Error,Int>
     @FXML lateinit var clCategoriaEL:TableColumn<Error,String>
+    var unidadCompilacion:UnidadCompilacion?=null
+
 
     // Arbol Sintactico
-    @FXML lateinit var tvArbol:TreeView<String>
+        @FXML lateinit var tvArbol:TreeView<String>
 
     override fun initialize(p0: URL?, p1: ResourceBundle?) {
         clmLexema.cellValueFactory=PropertyValueFactory("lexema")
@@ -62,7 +66,6 @@ class InicioController : Initializable{
         clFilaEL.cellValueFactory=PropertyValueFactory("fila")
         clColumnaEL.cellValueFactory=PropertyValueFactory("columna")
         clCategoriaEL.cellValueFactory=PropertyValueFactory("categoria")
-
 
         leerDatos();
     }
@@ -94,12 +97,18 @@ class InicioController : Initializable{
 
             if (lexico.listaErrores.isEmpty()) {
                 var sintaxis = AnalizadorSintactico(lexico.listaTokens)
-                var unidadCompilacion = sintaxis.esUnidadCompilacion()
+                unidadCompilacion = sintaxis.esUnidadCompilacion()
 
                 tblErroresSintacticos.items=FXCollections.observableArrayList(sintaxis.listaErrores)
 
                 if (unidadCompilacion != null) {
-                    tvArbol.root = unidadCompilacion.getArbolVisual()
+                    tvArbol.root = unidadCompilacion!!.getArbolVisual()
+
+                    var semantica=AnalizadorSemantico(unidadCompilacion!!)
+                    semantica.llenarTablaSimbolos()
+                    semantica.analizarSentica()
+                    println(semantica.tablaSimbolos)
+                    println(semantica.erroresSemanticos)
                 }
             }else{
                 var alerta=Alert(Alert.AlertType.WARNING)
@@ -109,6 +118,15 @@ class InicioController : Initializable{
             }
         }
         escribirDatos(codFuente)
+    }
+
+    @FXML
+    fun TraducirCodigo(e:ActionEvent){
+        if (unidadCompilacion != null) {
+           var codigoTraducido= unidadCompilacion!!.getJavaCod()
+            print(codigoTraducido)
+        }
+
     }
 
     /**
