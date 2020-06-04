@@ -49,6 +49,12 @@ class CicloForeach(var lista:Token,var item:Token,  var tipoDato:Token,var lista
     }
 
     override fun analizarSemantica(tablaSimbolos: TablaSimbolos, erroresSemanticos: ArrayList<Error>, ambito: String) {
+       var simb=tablaSimbolos.buscarSimboloValor(lista.lexema,ambito)
+
+        if (simb== null){
+            erroresSemanticos.add(Error("La lista ${lista.lexema} no existe dentro del ambito $ambito",lista.fila,lista.columna,""))
+        }
+
         if (listaSentencias != null) {
             for (sent in listaSentencias!!){
                 sent.analizarSemantica(tablaSimbolos,erroresSemanticos,ambito)

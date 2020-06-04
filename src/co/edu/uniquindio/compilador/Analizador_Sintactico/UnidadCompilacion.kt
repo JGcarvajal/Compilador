@@ -41,7 +41,8 @@ class UnidadCompilacion(var nombreClass:Token, var listaFunciones:ArrayList<Func
 
     fun getJavaCod():String{
 
-        var codigo= "public class ${nombreClass.getJavaCode()} { \n"
+        var codigo= " import javax.swing.*; \n " +
+                "public class ${nombreClass.getJavaCode()} { \n"
 
 
         for (f in listaFunciones) {

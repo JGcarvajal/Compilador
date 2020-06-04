@@ -17,11 +17,7 @@ class Incremento(var nombre:Token,var operador:Token):Sentencia() {
         return raiz
     }
 
-    override fun llenarTablaSimbolos(
-        tablaSimbolos: TablaSimbolos,
-        erroresSemanticos: ArrayList<Error>,
-        ambito: String
-    ) {
-        tablaSimbolos.guradarSimboloValor(nombre.lexema,"Integer",true,ambito,nombre.fila,nombre.columna,"Public")
+    override fun getJavaCode(): String {
+        return nombre.getJavaCode()+"++;"
     }
 }

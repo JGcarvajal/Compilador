@@ -46,6 +46,9 @@ class InicioController : Initializable{
     @FXML lateinit var clColumnaEL:TableColumn<Error,Int>
     @FXML lateinit var clCategoriaEL:TableColumn<Error,String>
     var unidadCompilacion:UnidadCompilacion?=null
+    lateinit var semantica:AnalizadorSemantico
+    lateinit var sintaxis:AnalizadorSintactico
+    lateinit var lexico:AnalizadorLexico
 
 
     // Arbol Sintactico
@@ -89,26 +92,26 @@ class InicioController : Initializable{
     fun AnalizarCodigo(e:ActionEvent){
         var codFuente=taCodigoFuente.text
         if (codFuente.length>0) {
-            var lexico=AnalizadorLexico(codFuente)
+            lexico=AnalizadorLexico(codFuente)
             lexico.Analizar()
 
             tblTokens.items=FXCollections.observableArrayList(lexico.listaTokens)
             tblErroresLexicos.items=FXCollections.observableArrayList(lexico.listaErrores)
 
             if (lexico.listaErrores.isEmpty()) {
-                var sintaxis = AnalizadorSintactico(lexico.listaTokens)
-                unidadCompilacion = sintaxis.esUnidadCompilacion()
+                sintaxis = AnalizadorSintactico(lexico.listaTokens)
+                unidadCompilacion = sintaxis!!.esUnidadCompilacion()
 
-                tblErroresSintacticos.items=FXCollections.observableArrayList(sintaxis.listaErrores)
+                tblErroresSintacticos.items=FXCollections.observableArrayList(sintaxis!!.listaErrores)
 
                 if (unidadCompilacion != null) {
                     tvArbol.root = unidadCompilacion!!.getArbolVisual()
 
-                    var semantica=AnalizadorSemantico(unidadCompilacion!!)
-                    semantica.llenarTablaSimbolos()
-                    semantica.analizarSentica()
-                    println(semantica.tablaSimbolos)
-                    println(semantica.erroresSemanticos)
+                    semantica=AnalizadorSemantico(unidadCompilacion!!)
+                    semantica!!.llenarTablaSimbolos()
+                    semantica!!.analizarSentica()
+                    println(semantica!!.tablaSimbolos)
+                    println(semantica!!.erroresSemanticos)
                 }
             }else{
                 var alerta=Alert(Alert.AlertType.WARNING)
@@ -122,9 +125,24 @@ class InicioController : Initializable{
 
     @FXML
     fun TraducirCodigo(e:ActionEvent){
-        if (unidadCompilacion != null) {
+        if (lexico.listaErrores.isEmpty() && sintaxis.listaErrores.isEmpty() && semantica.erroresSemanticos.isEmpty()) {
            var codigoTraducido= unidadCompilacion!!.getJavaCod()
+            File("src/Principal.java").writeText(codigoTraducido)
+
+            try {
+                var run =Runtime.getRuntime().exec("javac src/Principal.java")
+                run.waitFor()
+                Runtime.getRuntime().exec("java Principal",null,File("src"))
+            }catch ( ex:Exception){
+
+            }
+
             print(codigoTraducido)
+        }else{
+            val alert=Alert(Alert.AlertType.ERROR)
+            alert.headerText=null
+            alert.contentText="El codigo no se puede traducir porque hay errores"
+            alert.show()
         }
 
     }
@@ -160,27 +178,9 @@ class InicioController : Initializable{
      * Este metodo permite almacenar lo que se ha ingresado en la entrada de codigo
      */
     fun escribirDatos(datos:String){
-        var fichero:FileWriter?=null;
-        try{
-           // var ruta = "E:/archivo.txt";
-            var path:String=System.getProperty("java.io.tmpdir")+File.separator+"codFuente.txt"
-            var archivo: File = File(path);
-             fichero= FileWriter(path);
+        var path:String=System.getProperty("java.io.tmpdir")+File.separator+"codFuente.txt"
+        
+        File(path).writeText(datos)
 
-            if (!archivo.exists()) {
-                archivo.createNewFile();
-            }
-            var pw:PrintWriter= PrintWriter(fichero)
-            pw.println(datos)
-
-
-    }catch (e:Exception){
-            print("No se ha podido almacenar los datos")
-     }finally {
-
-            if (fichero != null){
-                fichero.close()
-            }
-     }
     }
 }

@@ -98,11 +98,13 @@ class Funcion (var modAcceso: Token,var nombreFuncion:Token, var tipoRetorno: To
             }
             codigo += " " + nombreFuncion.getJavaCode() + "("
                 if (listaParametros != null) {
+                    if (listaParametros.isNullOrEmpty() && listaParametros!!.size>0) {
 
-                    for (par in listaParametros!!) {
-                        codigo += par.getJavaCode() + ", "
+                        for (par in listaParametros!!) {
+                            codigo += par.getJavaCode() + ", "
+                        }
+                        codigo = codigo.substring(0, codigo.length - 2)
                     }
-                    codigo = codigo.substring(0, codigo.length - 2)
                 }
 
             codigo += ") { \n"

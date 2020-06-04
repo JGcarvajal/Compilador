@@ -227,6 +227,7 @@ class AnalizadorLexico (var codigoFuente:String) {
         palabrasRes.add("break")
         palabrasRes.add("finally")
         palabrasRes.add("bool")
+        palabrasRes.add("print")
 
 
         if(caracterActual.isLetter()){

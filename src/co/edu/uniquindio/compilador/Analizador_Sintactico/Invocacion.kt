@@ -40,11 +40,13 @@ class Invocacion(var nombre:Token, var listaArgumentos:ArrayList<Expresion>):Sen
     override fun getJavaCode(): String {
         var codigo ="\t \t"+ nombre.getJavaCode()+" ("
 
-        for    (arg in listaArgumentos){
-            codigo += arg.getJavaCode() +", "
+        if (listaArgumentos.isNotEmpty()) {
+            for (arg in listaArgumentos) {
+                codigo += arg.getJavaCode() + ", "
+            }
+            codigo = codigo.substring(0, codigo.length - 2)
         }
-        codigo= codigo.substring(0,codigo.length-2)+") \n"
-
+        codigo+= "); \n"
         return codigo
     }
 }
