@@ -20,4 +20,12 @@ class Incremento(var nombre:Token,var operador:Token):Sentencia() {
     override fun getJavaCode(): String {
         return nombre.getJavaCode()+"++;"
     }
+
+    override fun analizarSemantica(tablaSimbolos: TablaSimbolos, erroresSemanticos: ArrayList<Error>, ambito: String) {
+        var simb=tablaSimbolos.buscarSimboloValor(nombre.lexema, ambito)
+
+        if (simb == null){
+            erroresSemanticos.add(Error("La variable ${nombre.lexema} no existe dentro del ambito $ambito", nombre.fila, nombre.columna,""))
+        }
+    }
 }

@@ -1,12 +1,15 @@
- import javax.swing.*; 
- public class Principal { 
-public static void main (String[] args){ 
-	 	imprimir (); 
-	 } 
-	public static void imprimir() { 
-	int i=0; 
+import javax.swing.*;
+public class Principal {
+	public static void main (String[] args){
+		int a=((8*9)-(5+(9)));
+		int e=0, ee=0;
+		if (((-5+e)) <= (-a) && ((7+-ee)) >= (a)) {
+			String hola="";
 
-while (i < 5) { 
-JOptionPane.showMessageDialog(null,i);i++;} 
-	 } 
+			double loli=0.3;
+
+			loli++;}
+		else {
+		}
+	}
 }

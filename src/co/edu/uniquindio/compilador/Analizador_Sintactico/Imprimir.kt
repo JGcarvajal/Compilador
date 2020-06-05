@@ -9,7 +9,7 @@ class Imprimir(var expresion: Expresion):Sentencia() {
     }
 
     override fun getJavaCode(): String {
-        return "JOptionPane.showMessageDialog(null,"+expresion.getJavaCode()+");"
+        return "JOptionPane.showMessageDialog(null,"+expresion.getJavaCode()+"); \n"
     }
 
     override fun getArbolVisual(): TreeItem<String> {

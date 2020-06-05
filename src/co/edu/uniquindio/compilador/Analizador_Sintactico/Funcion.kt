@@ -83,7 +83,7 @@ class Funcion (var modAcceso: Token,var nombreFuncion:Token, var tipoRetorno: To
     fun getJavaCode():String {
     var codigo=""
 //* Principal (Main)
-        if (nombreFuncion.getJavaCode().toLowerCase() =="principal"){
+        if (nombreFuncion.getJavaCode().toLowerCase() =="main"){
             codigo ="public static void main (String[] args){ \n"
         }else {
             codigo = "\t"
@@ -98,7 +98,7 @@ class Funcion (var modAcceso: Token,var nombreFuncion:Token, var tipoRetorno: To
             }
             codigo += " " + nombreFuncion.getJavaCode() + "("
                 if (listaParametros != null) {
-                    if (listaParametros.isNullOrEmpty() && listaParametros!!.size>0) {
+                    if (!listaParametros.isNullOrEmpty() && listaParametros!!.size>0) {
 
                         for (par in listaParametros!!) {
                             codigo += par.getJavaCode() + ", "

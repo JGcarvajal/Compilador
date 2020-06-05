@@ -584,9 +584,25 @@ class AnalizadorSintactico(var listaTokens:ArrayList<Token>) {
         sentencia=esImpresion()
         if (sentencia != null) return sentencia
 
+        sentencia=esLeer()
+        if (sentencia != null) return sentencia
+
         return null
     }
 
+    fun esLeer():Sentencia?{
+
+        if (tokenActual.categoria== Categoria.PALABRA_RESERVADA && tokenActual.lexema== "Leer") {
+            obtenerSiguienteToken()
+            if (tokenActual.categoria == Categoria.IDENTIFICADOR) {
+                var variable = tokenActual
+                obtenerSiguienteToken()
+
+                return Leer(variable)
+            }
+        }
+        return null
+    }
     fun esImpresion():Sentencia?{
         if (tokenActual.categoria==Categoria.PALABRA_RESERVADA && tokenActual.lexema.toLowerCase()=="print"){
             obtenerSiguienteToken()

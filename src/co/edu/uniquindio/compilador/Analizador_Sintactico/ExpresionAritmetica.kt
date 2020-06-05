@@ -66,36 +66,36 @@ class ExpresionAritmetica():Expresion() {
     }
 
     override fun obtenerTipo(tablaSimbolos: TablaSimbolos, ambito:String, erroresSemanticos:ArrayList<Error>): String {
-       if ( expresionAritmetica1 != null && expresionAritmetica2 != null){
-           var tipo1 =expresionAritmetica1!!.obtenerTipo(tablaSimbolos,ambito,erroresSemanticos)
-           var tipo2 =expresionAritmetica2!!.obtenerTipo(tablaSimbolos,ambito,erroresSemanticos)
+        if ( expresionAritmetica1 != null && expresionAritmetica2 != null){
+            var tipo1 =expresionAritmetica1!!.obtenerTipo(tablaSimbolos,ambito,erroresSemanticos)
+            var tipo2 =expresionAritmetica2!!.obtenerTipo(tablaSimbolos,ambito,erroresSemanticos)
 
-           if (tipo1 == "decimal" || tipo2 == "decimal"){
-               return "decimal"
-           }else{
-               return "int"
-           }
+            if (tipo1 == "decimal" || tipo2 == "decimal"){
+                return "decimal"
+            }else{
+                return "int"
+            }
 
-       }else if (valorNumerico != null && expresionAritmetica2 != null){
-           var tipo1 =obtenerTipoCampo(tablaSimbolos, ambito, erroresSemanticos)
+        }else if (valorNumerico != null && expresionAritmetica2 != null){
+            var tipo1 =obtenerTipoCampo(tablaSimbolos, ambito, erroresSemanticos)
 
-           var tipo2 =expresionAritmetica2!!.obtenerTipo(tablaSimbolos,ambito,erroresSemanticos)
+            var tipo2 =expresionAritmetica2!!.obtenerTipo(tablaSimbolos,ambito,erroresSemanticos)
 
-           if ( tipo1 == "decimal" || tipo2 == "decimal"){
-               return "decimal"
-           }else{
-               return "int"
-           }
-       } else if (expresionAritmetica1 != null){
-           return expresionAritmetica1!!.obtenerTipo(tablaSimbolos,ambito,erroresSemanticos)
-       }else if (valorNumerico != null){
+            if ( tipo1 == "decimal" || tipo2 == "decimal"){
+                return "decimal"
+            }else{
+                return "int"
+            }
+        } else if (expresionAritmetica1 != null){
+            return expresionAritmetica1!!.obtenerTipo(tablaSimbolos,ambito,erroresSemanticos)
+        }else if (valorNumerico != null){
             return obtenerTipoCampo(tablaSimbolos, ambito, erroresSemanticos)
-       }
+        }
         return ""
     }
 
     fun obtenerTipoCampo(tablaSimbolos: TablaSimbolos,ambito: String,erroresSemanticos: ArrayList<Error>):String{
-            if (valorNumerico!!.numero.categoria == Categoria.ENTREO){
+        if (valorNumerico!!.numero.categoria == Categoria.ENTREO){
             return "int"
         }else if (valorNumerico!!.numero.categoria == Categoria.DECIMAL){
             return "decimal"
@@ -115,26 +115,26 @@ class ExpresionAritmetica():Expresion() {
         if (valorNumerico != null){
             if (valorNumerico!!.numero.categoria ==Categoria.IDENTIFICADOR){
 
-                    var simb:Simbolo? = tablaSimbolos.buscarSimboloValor(valorNumerico!!.numero.lexema, ambito)
+                var simb:Simbolo? = tablaSimbolos.buscarSimboloValor(valorNumerico!!.numero.lexema, ambito)
 
-                    if (simb == null) {
+                if (simb == null) {
 
-                        erroresSemanticos.add(
-                                Error(
-                                    "El campo ${valorNumerico!!.numero.lexema} no existe dontro del ambito $ambito",
-                                    valorNumerico!!.numero.fila, valorNumerico!!.numero.columna, ""
-                                )
-                                )
-
-                    }else if (simb!!.tipo != "int" && simb!!.tipo != "decimal") {
-
-                        erroresSemanticos.add(
-                            Error(
-                                "El campo ${valorNumerico!!.numero.lexema} no no representa un valor numerico en la expresion aritmetica",
-                                valorNumerico!!.numero.fila, valorNumerico!!.numero.columna, ""
-                            )
+                    erroresSemanticos.add(
+                        Error(
+                            "El campo ${valorNumerico!!.numero.lexema} no existe dontro del ambito $ambito",
+                            valorNumerico!!.numero.fila, valorNumerico!!.numero.columna, ""
                         )
-                    }
+                    )
+
+                }else if (simb!!.tipo != "int" && simb!!.tipo != "decimal") {
+
+                    erroresSemanticos.add(
+                        Error(
+                            "El campo ${valorNumerico!!.numero.lexema} no no representa un valor numerico en la expresion aritmetica",
+                            valorNumerico!!.numero.fila, valorNumerico!!.numero.columna, ""
+                        )
+                    )
+                }
 
 
             }
@@ -150,16 +150,18 @@ class ExpresionAritmetica():Expresion() {
 
     override fun getJavaCode(): String {
         var codigo=""
-        if (valorNumerico != null){
-            codigo=valorNumerico!!.getJavaCode()
-        }
-        if (expresionAritmetica1!= null){
-            expresionAritmetica1!!.getJavaCode()
+
+        if (expresionAritmetica1 != null && expresionAritmetica2 != null) {
+            codigo += "(" + expresionAritmetica1!!.getJavaCode() + operador!!.getJavaCode() + expresionAritmetica2!!.getJavaCode() + ")"
+        } else if (valorNumerico != null && expresionAritmetica2 != null) {
+            codigo += "(" + valorNumerico!!.getJavaCode() + operador!!.getJavaCode() + expresionAritmetica2!!.getJavaCode() + ")"
+        } else if (expresionAritmetica1 != null) {
+            codigo += "("+expresionAritmetica1!!.getJavaCode()+")"
+        } else if (valorNumerico != null) {
+            codigo += valorNumerico!!.getJavaCode()
         }
 
-        if (expresionAritmetica2!= null){
-            expresionAritmetica2!!.getJavaCode()
-        }
+
 
         return codigo
     }
