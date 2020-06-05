@@ -1,15 +1,12 @@
-import javax.swing.*;
-public class Principal {
-	public static void main (String[] args){
-		int a=((8*9)-(5+(9)));
-		int e=0, ee=0;
-		if (((-5+e)) <= (-a) && ((7+-ee)) >= (a)) {
-			String hola="";
+ import javax.swing.*; 
+ public class Principal { 
+public static void main (String[] args){ 
+	String max=""; 
 
-			double loli=0.3;
-
-			loli++;}
-		else {
-		}
-	}
+max= JOptionPane.showInputDialog(null, "Escriba un valor"); 
+	 	imprimir (max); 
+	 } 
+	public static void imprimir(String max) { 
+JOptionPane.showMessageDialog(null,max); 
+	 } 
 }

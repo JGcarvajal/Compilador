@@ -62,7 +62,7 @@ class Asignacion():Sentencia() {
                 expresion!!.analizarSemantica(tablaSimbolos, erroresSemanticos, ambito)
                 var tipoExp =expresion!!.obtenerTipo(tablaSimbolos, ambito, erroresSemanticos)
 
-                if (tipoExp != tipo){
+                if (tipoExp.toLowerCase() != tipo.toLowerCase() ){
                     erroresSemanticos.add(Error("El tipo de dato de la expresion ${tipoExp} no coincide con el tipo de dato del campo ${nombre!!.lexema} que es de tipo $tipo",
                         nombre!!.fila,nombre!!.columna,""))
                 }

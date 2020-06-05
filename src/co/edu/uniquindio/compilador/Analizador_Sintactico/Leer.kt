@@ -34,7 +34,7 @@ if (simbolo != null) {
         "demimal" -> codigo= variable.getJavaCode() + "= Double.parseDouble(JOptionPane.showInputDialog(null, \"Escriba un valor\")); \n"
         "bool" -> codigo= variable.getJavaCode() + "= Boolean.parseBoolean(JOptionPane.showInputDialog(null, \"Escriba un valor\")); \n"
         else -> { // Note the block
-             variable.getJavaCode() + "= JOptionPane.showInputDialog(null, \"Escriba un valor\"); \n"
+            codigo=  variable.getJavaCode() + "= JOptionPane.showInputDialog(null, \"Escriba un valor\"); \n"
         }
     }
 }
