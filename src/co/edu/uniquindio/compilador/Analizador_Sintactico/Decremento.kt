@@ -32,4 +32,8 @@ class Decremento(var nombre:Token,var operador:Token):Sentencia() {
             erroresSemanticos.add(Error("La variable ${nombre.lexema} no existe dentro del ambito $ambito", nombre.fila, nombre.columna,""))
         }
     }
+
+    override fun getJavaCode(): String {
+        return nombre.getJavaCode()+"--; \n"
+    }
 }

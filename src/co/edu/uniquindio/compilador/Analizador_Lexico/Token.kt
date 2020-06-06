@@ -22,6 +22,8 @@ class Token (var lexema:String, var categoria: Categoria, var fila:Int, var colu
                 return "String"
             }else if (lexema.toLowerCase() == "decimal"){
                 return "double"
+            }else if (lexema.toLowerCase() == "exception"){
+                return "Exception"
             }
         }
 

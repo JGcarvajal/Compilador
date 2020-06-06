@@ -1,0 +1,59 @@
+public class _Principal_ {
+		public function notReturn _main_ (){
+		int _max_=0
+		Leer _max_
+		_imprimir_(_max_)
+	}
+	public function notReturn _imprimir_ (int _max_){
+	int _i_ =0
+	meantime(_i_ <= _max_){
+	print _i_
+	_i_++
+	}
+}
+}
+
+----------------------------------------------------------------
+private class _Principal_ {
+protected function float _main_ ( )
+{
+
+ 	int _a_=(8*9)-5+(9)
+    if( (-5 + _e_)<= (-_a_) & (7 + -_ee_ )>= (_a_) )
+    {
+    public string _hola_ =""
+decimal _loli_=0.3
+_loli_ ++
+ break 
+ } else {
+
+try {
+String _pruebita_ *= _ño_
+} catch ( exception _exe_ ) 
+{
+}
+    } 
+    
+return _a_
+}
+} 
+
+------------------------------------------------------------
+public class _pruebaCodigo_ {
+		public function notReturn _main_ (){
+			
+	}
+	public function notReturn _restar_ (int _a_, int _b_){
+		foreach(_z_ in _ga_ as float ) 
+		   {	}
+
+		meanTime (9>6){
+		string _var_="Hola gente"
+		}
+		
+		if (9==8 & !8>3){
+			int _var2_=5
+			int _var3_=_var2_
+		}
+	}
+}
